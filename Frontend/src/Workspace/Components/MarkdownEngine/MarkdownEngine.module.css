@@ -1,3 +1,27 @@
 .wrapper {
+  position: relative;
   overflow-x: hidden;
+}
+
+.cardWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* 適宜調整 */
+}
+
+.card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(-20px);
 }

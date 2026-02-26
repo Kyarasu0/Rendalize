@@ -2,6 +2,7 @@
 ---
 layout: Aurora dark
 mode: slide
+transition: Fade
 ---
 \MessageCard Right bg_color=transparent font_color=white
 

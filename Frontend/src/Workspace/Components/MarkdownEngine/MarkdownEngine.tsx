@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { parseMarkdown } from "../../Utils/parseMarkdown";
 import styles from "./MarkdownEngine.module.css";
+import type { Parsed } from "../../Utils/parseMarkdown";
 // Cardの種類のimport
-import type { ParsedCard } from "../../Utils/parseMarkdown";
 import { MessageCard } from "../Cards/MessageCard/MessageCard";
 // Layoutの種類のimport(Layout, import, layoutRegistry)
-import type { ParsedLayout } from "../../Utils/parseMarkdown";
 import { Normal } from "../Layouts/Normal/Normal";
 import { Aurora } from "../Layouts/Aurora/Aurora";
 // Navigationの種類のimport
 import { Navigation } from "../Navigation/Navigation";
+// Transitionの種類のimport
+import { Fade } from "../Transitions/Fade/Fade";
 
 interface Props {
   url: string;
@@ -19,28 +20,31 @@ interface Props {
 export const MarkdownEngine = ({ url, mode }: Props) => {
   // ========== Card ==========
   // Markdownの \CardName と一致させる
-  const cardRegistry: Record<
-    string,
-    React.ComponentType<any>
-  > = {
+  const cardRegistry: Record<string, React.ComponentType<any>> = {
     MessageCard,
-    // HeroCard,
-    // QuoteCard,
   };
   // カードを「順番付き配列」で保持する
-  // [{ type: "MessageCard", content: "..." }, ...]
-  const [cards, setCards] = useState<ParsedCard[]>([]);
+  const [cards, setCards] = useState<Parsed[]>([]);
+  // ==========================
 
   // ========== Layout ===========
-  // Markdownの \CardName と一致させる
-  const layoutRegistry: Record<
-    string,
-    React.ComponentType<any>
-  > = {
+  const layoutRegistry: Record<string, React.ComponentType<any>> = {
     Normal,
-    Aurora
+    Aurora,
   };
-  const [layout, setLayout] = useState<ParsedLayout>({ type: "Normal", props: "dark" });
+  const [layout, setLayout] = useState<Parsed>({
+    type: "Normal",
+    props: { theme: "dark" },
+  });
+  // =============================
+
+  // ========== Transition ===========
+  const transitionRegistry: Record<string, React.ComponentType<any>> = {
+    Fade,
+    // slideやzoomなど将来追加可能
+  };
+  const [transition, setTransition] = useState<Parsed>({ type: "Fade" });
+  // =================================
 
   // スライドモード用の現在インデックス
   const [index, setIndex] = useState(0);
@@ -54,9 +58,15 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
       .then(raw => {
         const parsed = parseMarkdown(raw);
 
-        // cards は配列なのでそのままセットできる
         setCards(parsed.cards);
-        setLayout({ type: parsed.meta.layout.split(' ')[0], props: parsed.meta.layout.split(' ')[1] });
+        setLayout({
+          type: parsed.meta.layout.split(" ")[0],
+          props: { theme: parsed.meta.layout.split(" ")[1] },
+        });
+        setTransition({ 
+          type: parsed.meta.transition.split(" ")[0],
+          props: { theme: parsed.meta.transition.split(" ")[1] },
+        });
 
         // URLが変わったらスライド位置もリセット
         setIndex(0);
@@ -70,29 +80,38 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
     const handler = (e: KeyboardEvent) => {
       if (mode !== "slide") return;
 
-      if (e.key === "ArrowRight") {
-        setIndex(i => Math.min(i + 1, cards.length - 1));
-      }
-
-      if (e.key === "ArrowLeft") {
-        // ← ここ前はバグってた（-0になってた）
-        setIndex(i => Math.max(i - 1, 0));
-      }
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
     };
 
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [cards, mode]);
+  }, [cards, index, mode]);
+
+  // =========================
+  // カード切り替え
+  // =========================
+  const handleNext = () => {
+    if (index >= cards.length - 1) return;
+    setIndex(i => i + 1);
+  };
+
+  const handlePrev = () => {
+    if (index <= 0) return;
+    setIndex(i => i - 1);
+  };
 
   // =========================
   // 現在表示するカード
   // =========================
   const currentCard = cards[index];
   const LayoutComponent = layoutRegistry[layout.type] ?? Normal;
+  const CardComponent = currentCard ? cardRegistry[currentCard.type] ?? MessageCard : null;
+  const TransitionComponent = transitionRegistry[transition.type] ?? Fade;
 
   return (
     <div className={styles.wrapper}>
-      <LayoutComponent theme={layout.props}/>
+      <LayoutComponent theme={layout.props!.theme} />
 
       {/* =========================
           描画切り替え
@@ -100,28 +119,25 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
       {mode === "slide" ? (
 
         // スライドモード
-        currentCard ? (() => {
-          // type に対応するコンポーネントを取得
-          // 存在しなければ MessageCard を使う
-          const CardComponent = cardRegistry[currentCard.type] ?? MessageCard;
-
-          // ...obj = key1={obj.key1} key2={obj.key2} 
-          return (
-            <CardComponent
-              content={currentCard.content}
-              {...(currentCard.props ?? {})}
-            />
-          );
-        })() : null
+        <div className={styles.cardWrapper}>
+          <TransitionComponent key={index} trigger={index} duration={300}>
+            
+            {CardComponent ? (
+              <CardComponent
+                content={currentCard.content}
+                {...(currentCard.props ?? {})}
+              />
+            ) : null}
+          </TransitionComponent>
+        </div>
 
       ) : (
 
         // Webモード（全部表示）
         cards.map((card, i) => {
-          const CardComponent = cardRegistry[card.type] ?? MessageCard;
-
+          const CardComp = cardRegistry[card.type] ?? MessageCard;
           return (
-            <CardComponent
+            <CardComp
               key={i}
               content={card.content}
               {...(card.props ?? {})}
@@ -133,15 +149,11 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
       {/* =========================
           ナビゲーション（スライド時のみ）
-          ========================= */}
+      ========================= */}
       {mode === "slide" && cards.length > 1 && (
         <Navigation
-          onNext={() =>
-            setIndex(i => Math.min(i + 1, cards.length - 1))
-          }
-          onPrev={() =>
-            setIndex(i => Math.max(i - 1, 0))
-          }
+          onNext={handleNext}
+          onPrev={handlePrev}
         />
       )}
     </div>

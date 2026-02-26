@@ -1,18 +1,13 @@
 // Markdownをカード単位に分割する簡易パーサ
-export interface ParsedCard {
+export interface Parsed {
     type: string;
     props?: Record<string, string>;
-    content: string;
-}
-
-export interface ParsedLayout {
-    type: string;
-    props?: string;
+    content?: string;
 }
 
 export interface ParsedMarkdown {
     meta: Record<string, string>;
-    cards: ParsedCard[];
+    cards: Parsed[];
 }
 
 export const parseMarkdown = (raw: string): ParsedMarkdown => {
@@ -20,7 +15,7 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
     const sections = raw.split('---').map(s => s.trim()).filter(Boolean);
 
     let meta: Record<string, string> = {};
-    let cards: ParsedCard[] = [];
+    let cards: Parsed[] = [];
 
     sections.forEach((section, idx) => {
         // "\n"でカードとして区切って無効な要素を潰す
