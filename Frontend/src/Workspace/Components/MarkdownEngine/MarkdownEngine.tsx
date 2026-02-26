@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { parseMarkdown } from "../../Utils/parseMarkdown";
+import styles from "./MarkdownEngine.module.css";
+// Cardの種類のimport
 import type { ParsedCard } from "../../Utils/parseMarkdown";
 import { MessageCard } from "../Cards/MessageCard/MessageCard";
-import { Layout } from "../Layout/Layout";
+// Layoutの種類のimport(Layout, import, layoutRegistry)
+import type { ParsedLayout } from "../../Utils/parseMarkdown";
+import { Normal } from "../Layouts/Normal/Normal";
+import { Aurora } from "../Layouts/Aurora/Aurora";
+// Navigationの種類のimport
 import { Navigation } from "../Navigation/Navigation";
-import styles from "./MarkdownEngine.module.css";
 
 interface Props {
   url: string;
@@ -12,7 +17,7 @@ interface Props {
 }
 
 export const MarkdownEngine = ({ url, mode }: Props) => {
-  // カードタイプとコンポーネントの対応表
+  // ========== Card ==========
   // Markdownの \CardName と一致させる
   const cardRegistry: Record<
     string,
@@ -22,10 +27,20 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
     // HeroCard,
     // QuoteCard,
   };
-
   // カードを「順番付き配列」で保持する
   // [{ type: "MessageCard", content: "..." }, ...]
   const [cards, setCards] = useState<ParsedCard[]>([]);
+
+  // ========== Layout ===========
+  // Markdownの \CardName と一致させる
+  const layoutRegistry: Record<
+    string,
+    React.ComponentType<any>
+  > = {
+    Normal,
+    Aurora
+  };
+  const [layout, setLayout] = useState<ParsedLayout>({ type: "Normal", props: "dark" });
 
   // スライドモード用の現在インデックス
   const [index, setIndex] = useState(0);
@@ -41,6 +56,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
         // cards は配列なのでそのままセットできる
         setCards(parsed.cards);
+        setLayout({ type: parsed.meta.layout.split(' ')[0], props: parsed.meta.layout.split(' ')[1] });
 
         // URLが変わったらスライド位置もリセット
         setIndex(0);
@@ -72,11 +88,11 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
   // 現在表示するカード
   // =========================
   const currentCard = cards[index];
+  const LayoutComponent = layoutRegistry[layout.type] ?? Normal;
 
   return (
     <div className={styles.wrapper}>
-      {/* 共通レイアウト */}
-      <Layout theme="dark" />
+      <LayoutComponent theme={layout.props}/>
 
       {/* =========================
           描画切り替え

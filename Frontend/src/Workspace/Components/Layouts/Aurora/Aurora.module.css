@@ -1,0 +1,84 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: #0f0f0f;
+}
+
+/* ===== 浮遊ブロブ ===== */
+
+.blob1,
+.blob2 {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  animation: float 20s ease-in-out infinite alternate;
+}
+
+.blob1 {
+  background: radial-gradient(circle, #6a5acd, transparent 70%);
+  top: -20%;
+  left: -10%;
+}
+
+.blob2 {
+  background: radial-gradient(circle, #00d4ff, transparent 70%);
+  bottom: -20%;
+  right: -10%;
+  animation-duration: 25s;
+}
+
+/* ===== ゆっくり浮遊 ===== */
+
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(40px, -30px) scale(1.1);
+  }
+  100% {
+    transform: translate(-30px, 40px) scale(0.95);
+  }
+}
+
+/* ===== グリッドレイヤー ===== */
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 80px
+    );
+  pointer-events: none;
+}
+
+/* ===== マウス追従光 ===== */
+
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  transition: background 0.2s ease-out;
+}

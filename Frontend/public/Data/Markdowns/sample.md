@@ -1,13 +1,18 @@
 
 ---
-background: dark
+layout: Aurora dark
 mode: slide
 ---
+\MessageCard Right bg_color=transparent font_color=white
 
 # Title
+## ToDo List
+- 朝起きる
+- ご飯を食べる
+- 寝る
 
 ---
-\MessageCard Left bg_color=black font_color=white
+\MessageCard Left bg_color=transparent font_color=white
 # Card 1
 
 ## ABOUT

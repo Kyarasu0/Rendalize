@@ -5,6 +5,11 @@ export interface ParsedCard {
     content: string;
 }
 
+export interface ParsedLayout {
+    type: string;
+    props?: string;
+}
+
 export interface ParsedMarkdown {
     meta: Record<string, string>;
     cards: ParsedCard[];

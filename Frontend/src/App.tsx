@@ -12,7 +12,7 @@ function App() {
   return (
     // MarkdownEngineに渡す
     <MarkdownEngine
-      url={`/Data/${file}`}
+      url={`/Data/Markdowns/${file}`}
       mode={mode}
     />
   );
