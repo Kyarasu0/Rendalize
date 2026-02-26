@@ -1,0 +1,59 @@
+.card {
+  /* 大きさ設定 */
+  min-height: 100vh;
+  min-width: 100vw;
+  /* バックグラウンド設定 */
+  background: rgba(255,255,255,0.08);
+  /* 要素配置設定 */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* 文字設定 */
+  color: white;
+  /* 装飾設定 */
+  backdrop-filter: blur(20px);
+  /* 配置基準設定 */
+  overflow: hidden;
+}
+
+.contentSide{
+  /* 大きさ設定 */
+  width: 50%;
+  height: 100%;
+  /* バックグラウンド設定 */
+  /* 要素配置設定 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* 余白設定 */
+  padding: 100px;
+  /* 文字設定 */
+  font-size: 17px;
+  line-height: 2.3;
+  /* 装飾設定 */
+  /* 配置基準設定 */
+  /* アニメーション設定 */
+  /* 画像設定 */
+}
+
+.titleSide{
+  /* 大きさ設定 */
+  width: 50%;
+  height: 100%;
+  /* バックグラウンド設定 */
+  /* 要素配置設定 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* 余白設定 */
+  padding: 100px;
+  /* 文字設定 */
+  font-size: 30px;
+  line-height: 2.3;
+  /* 装飾設定 */
+  /* 配置基準設定 */
+  /* アニメーション設定 */
+  /* 画像設定 */
+}
