@@ -1,23 +1,135 @@
-.navigator {
+/* Navigation.module.css */
+.container {
   position: fixed;
   top: 24px;
   right: 24px;
   display: flex;
-  gap: 12px;
+  align-items: center;
+  padding: 6px;
+  border-radius: 999px;
+
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s ease;
+  z-index: 100;
+  color: white; /* デフォルト白 */
 }
 
-.navigator button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
+/* モード別背景・文字色 */
+.container.dark {
+  background: rgba(255, 255, 255, 0.1);
   color: white;
-  cursor: pointer;
-  transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.navigator button:hover {
-  transform: scale(1.1);
+.container.light {
+  background: rgba(0, 0, 0, 0.1);
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* ホバー時のパネル背景 */
+.container.dark:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.container.light:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 共通ボタンスタイル */
+.iconButton,
+.optionButton {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.05); /* デフォルト */
+  color: inherit; /* container の color を継承 */
+}
+
+/* ボタンのモード別背景 */
+.container.dark .iconButton,
+.container.dark .optionButton {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.container.light .iconButton,
+.container.light .optionButton {
+  background: rgba(0, 0, 0, 0.05);
+  color: black;
+}
+
+/* ボタンホバー */
+.container.dark .iconButton:hover,
+.container.dark .optionButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.container.light .iconButton:hover,
+.container.light .optionButton:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* アイコンも文字色に追従 */
+.iconButton svg,
+.optionButton svg {
+  color: currentColor;
+  filter: none;
+}
+
+/* ナビボタンのレイアウト */
+.navButtons {
+  display: flex;
+  gap: 6px;
+}
+
+/* 区切り線 */
+.divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+  border-radius: 999px;
+}
+
+.container.light .divider {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* カーソルエリア */
+.cursorArea {
+  display: flex;
+  align-items: center;
+}
+
+/* 展開エリア */
+.expandArea {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-16px);
+
+  transition:
+    max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expanded {
+  max-width: 400px;
+  opacity: 1;
+  margin-left: 4px;
+  transform: translateX(0);
 }

@@ -3,6 +3,7 @@
 layout: Aurora dark
 mode: slide
 transition: Fade
+cursor: laser sparkle
 ---
 \MessageCard Right bg_color=transparent font_color=white
 
@@ -13,7 +14,7 @@ transition: Fade
 - 寝る
 
 ---
-\MessageCard Left bg_color=transparent font_color=white
+\MessageCard Left bg_color=cyan font_color=white
 # Card 1
 
 ## ABOUT
@@ -23,6 +24,7 @@ URLのクエリを編集することによってカード単位に合わせて�
 今後の展望はカーソルなどのカスタマイズとPhotonを用いたP2Pによるブラウザ間画面共有を実現することです。
 
 ---
-
-## Card 2
-content
+\MessageCard Right bg_color=black font_color=white
+# Memo
+## P2Pの強み
+- スマホでホストすればスマホがリモコンになる設計
