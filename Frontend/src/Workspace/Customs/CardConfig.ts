@@ -1,9 +1,24 @@
-import { MessageCard } from "../Components/Cards/MessageCard/MessageCard";
+import { NormalCard } from "../Components/Cards/NormalCard/NormalCard";
+import { ListCard } from "../Components/Cards/ListCard/ListCard";
+import { MediaCard } from "../Components/Cards/MediaCard/MediaCard";
+import { TimelineCard } from "../Components/Cards/TimelineCard/TimelineCard";
 
 export const CardConfig = {
-  MessageCard: {
-    component: MessageCard,
-    label: "Message",
+  NormalCard: {
+    component: NormalCard,
+    label: "Normal",
+  },
+  ListCard: { 
+    component: ListCard,
+    label: "List" 
+  },
+  MediaCard: { 
+    component: MediaCard,
+    label: "Media"
+  },
+  TimelineCard: { 
+    component: TimelineCard,
+    label: "Timeline"
   },
 } as const;
 

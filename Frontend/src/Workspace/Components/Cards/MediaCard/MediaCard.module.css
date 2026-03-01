@@ -1,0 +1,41 @@
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 20px;
+  padding: 32px;
+  border-radius: 16px;
+
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.none {
+  border: none;
+  box-shadow: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;      /* はみ出す部分を切り取り */
+  transition: transform 0.7s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+.content {
+  padding: 24px;
+}

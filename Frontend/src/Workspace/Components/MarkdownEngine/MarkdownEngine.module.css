@@ -1,4 +1,5 @@
 .wrapper {
+  width: 100%;
   position: relative;
   overflow-x: hidden;
 }
@@ -7,9 +8,21 @@
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 200px; /* 適宜調整 */
+  min-height: 100%; /* 適宜調整 */
+}
+
+.pageWrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
 }
 
 .card {

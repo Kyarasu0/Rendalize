@@ -1,0 +1,83 @@
+.card {
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE10+ */
+  margin: 20px;
+  padding: 32px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  transition: all 0.3s ease;
+
+  scroll-padding-top: 32px; /* スクロール時の余白 */
+}
+
+.card::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.timelineLine {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  /* paddingは不要 */
+}
+
+.timelineLine::before {
+  content: "";
+  position: absolute;
+  left: 20px; /* 中央線位置 */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.eventWrapper {
+  position: relative;
+  padding-left: 60px; /* 年・丸用スペース確保 */
+  min-height: 24px; /* 丸が重ならないように高さを確保 */
+}
+
+.circle {
+  position: absolute;
+  left: 12px; /* 中央線に合わせる */
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #3b82f6; /* 青丸 */
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.eventWrapper:hover .circle {
+  transform: scale(1.2);
+}
+
+.year {
+  display: block;
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0;
+}
