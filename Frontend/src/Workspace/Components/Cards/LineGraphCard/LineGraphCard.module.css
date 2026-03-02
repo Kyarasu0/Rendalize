@@ -1,0 +1,20 @@
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  border-radius: 16px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.graphContainer {
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 16px;
+}
+
+.graph {
+  width: 100%;
+  height: 100%;
+}
