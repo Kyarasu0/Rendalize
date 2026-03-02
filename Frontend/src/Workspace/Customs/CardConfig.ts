@@ -6,6 +6,7 @@ import { LineGraphCard } from "../Components/Cards/LineGraphCard/LineGraphCard";
 import { StackCard } from "../Components/Cards/StackCard/StackCard";
 import { StepCircleCard } from "../Components/Cards/StepCircleCard/StepCircleCard";
 import { FlipCard } from "../Components/Cards/FlipCard/FlipCard";
+import { TitleCard } from "../Components/Cards/TitleCard/TitleCard";
 
 export const CardConfig = {
   NormalCard: {
@@ -39,6 +40,10 @@ export const CardConfig = {
   FlipCard: { 
     component: FlipCard,
     label: "Flip"
+  },
+  TitleCard: { 
+    component: TitleCard,
+    label: "Title"
   },
 } as const;
 

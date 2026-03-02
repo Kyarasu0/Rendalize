@@ -1,6 +1,8 @@
 import { Laser } from "../Components/Cursors/Laser/Laser";
 import { Sparkle } from "../Components/Cursors/Sparkle/Sparkle";
 import { Glow } from "../Components/Cursors/Glow/Glow";
+import { TapRipple } from "../Components/Cursors/TapRipple/TapRipple";
+import { Marker } from "../Components/Cursors/Marker/Marker";
 
 export const CursorConfig = {
   laser: {
@@ -14,6 +16,14 @@ export const CursorConfig = {
   glow: {
     component: Glow,
     label: "Glow",
+  },
+  TapRipple: {
+    component: TapRipple,
+    label: "TapRipple",
+  },
+  Marker: {
+    component: Marker,
+    label: "Marker",
   },
 } as const;
 

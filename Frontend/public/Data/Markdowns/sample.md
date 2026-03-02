@@ -1,7 +1,7 @@
 ===
 layout: Aurora dark
 transition: Fade
-cursor: laser
+cursor: laser TapRipple Marker
 ===
 
 \ListCard align=left bg_color=rgba(100, 100, 100, 0.3) font_color=white width=60%
@@ -19,6 +19,9 @@ cursor: laser
 - 背景ピンク
 - 文字白
 - 幅20%
+---
+\TitleCard align=left
+# Project Timeline
 
 ===
 \ListCard align=left bg_color=none font_color=white width=40%
@@ -91,4 +94,32 @@ Click to create a new room.
 ::back::
 # Join Room
 Enter room name to join.
+===
+\StepCircleCard align=center bg_color=rgba(50,50,50,0.3) font_color=white width=40%
+
+num:1 icon:CheckCircle2 text:Plan
+num:2 icon:Code text:Build
+num:3 icon:Rocket text:Launch
+num:4 icon:Rocket text:Launch
+---
+\TimelineCard bg_color=rgba(50,50,50,0.3) width=60%
+
+[
+  { "year": "2023", "label": "Concept Design", "color": "#f43f5e" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2025", "label": "Global Scale" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" },
+  { "year": "2024", "label": "Beta Release", "color": "#10b981" }
+]
+---
+\TitleCard align=left
+# Title
 ===
