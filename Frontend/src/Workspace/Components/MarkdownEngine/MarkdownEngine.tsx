@@ -9,6 +9,7 @@ import { CardConfig } from "../../Customs/CardConfig";
 import { LayoutConfig } from "../../Customs/LayoutConfig";
 import { TransitionConfig } from "../../Customs/TransitionConfig";
 import { CursorConfig } from "../../Customs/CursorConfig";
+import { TitleConfig } from "../../Customs/TitleConfig";
 
 interface Props {
   url: string;
@@ -16,9 +17,14 @@ interface Props {
 }
 
 export const MarkdownEngine = ({ url, mode }: Props) => {
-  // ========== Card ==========
+  // ========== Page ==========
   const [pages, setPages] = useState<Parsed[][]>([]);
   // ==========================
+
+  // 追加
+  // ========== Title ==========
+  const [pageTitles, setPageTitles] = useState<Parsed[]>([]);
+  // ===========================
 
   // ========== Layout ===========
   const [layout, setLayout] = useState<Parsed>({
@@ -38,6 +44,9 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
   // スライドモード用の現在インデックス
   const [index, setIndex] = useState(0);
+
+  // meta に font がある場合、state に保存
+  const [globalFont, setGlobalFont] = useState<string | undefined>(undefined);
 
   // =========================
   // Markdownをフェッチしてパース
@@ -77,6 +86,16 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
         } else {
           setMetaCursorOptions([]);
           setActiveCursor(null);
+        }
+
+        // 追加
+        setPageTitles(parsed.pageTitles ?? []);
+
+        if (parsed.meta.font) {
+          // "A B" の場合、スペースで分割して優先順に適用
+          const fonts = parsed.meta.font.split(/\s+/);
+          // CSS に適用する場合はカンマ区切りに
+          setGlobalFont(fonts.join(", "));
         }
 
         // URLが変わったらスライド位置もリセット
@@ -153,48 +172,80 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
   // =========================
   // ページ描画関数（サブカード横詰め）
   // =========================
-  const renderPage = (page: Parsed[], pageIndex?: number) => {
+  const renderPage = (page: Parsed[], pageIndex: number) => {
     const subCount = page.length;
+    // 現在のページに対応するタイトル情報を取得
+    const title = pageTitles[pageIndex];
+    
+    // ===== このページのタイトルコンポーネントを動的に取得 =====
+    // pageIndexに対応するタイトル情報から、指定されたタイプのコンポーネントを取得
+    // デフォルトはNormalTitleコンポーネントを使用
+    const PageTitleComponent = title
+      ? TitleConfig[title.type as keyof typeof TitleConfig]?.component ??
+        TitleConfig.NormalTitle?.component
+      : null;
+    // =======================================================
 
     return (
-      <div
-        key={pageIndex}
-        className={styles.pageWrapper}
-        style={{ display: "flex", width: "100%" }}
-      >
-        {page.map((card, i) => {
-          const CardComp =
-            CardConfig[card.type as keyof typeof CardConfig]?.component ??
-            CardConfig.NormalCard.component;
+      <div key={pageIndex} className={styles.MainCard}>
+        {/* ===== タイトル領域 ===== */}
+        {/* タイトルコンテンツがある場合のみ描画 */}
+        {title?.content && PageTitleComponent && (
+          <PageTitleComponent
+            // タイトルのプロパティ（align等）を展開
+            {...title.props}
+            // タイトルのテキストコンテンツを指定
+            content={title.content}
+          />
+        )}
+        {/* ====================== */}
 
-          // width未指定なら均等割り
-          const width = card.props?.width ?? `${100 / subCount}%`;
+        {/* ===== サブカード領域 ===== */}
+        <div className={styles.SubCards}>
+          {page.map((card, i) => {
+            // CardConfigから現在のカードタイプに対応するコンポーネントを取得
+            // デフォルトはNormalCardコンポーネントを使用
+            const CardComp =
+              CardConfig[card.type as keyof typeof CardConfig]?.component ??
+              CardConfig.NormalCard.component;
 
-          return (
-            <div
-              key={i}
-              style={{
-                flex: `0 0 ${width}`,
-                display: "flex",
-              }}
-              // className={styles.cardComp}
-            >
-              <CardComp
-                content={card.content ?? ""}
-                bg_color={card.props?.bg_color}
-                font_color={card.props?.font_color}
-                align={safeAlign(card.props?.align)}
-                media={card.props?.media}
-              />
-            </div>
-          );
-        })}
+            // カード幅をプロパティから取得、未指定の場合は均等配分
+            const width = card.props?.width ?? `${100 / subCount}%`;
+
+            return (
+              <div
+                key={i}
+                className={styles.SubCardWrapper}
+                style={{ flex: `0 0 ${width}` }}
+              >
+                <CardComp
+                  // カードのテキストコンテンツを指定
+                  content={card.content ?? ""}
+                  // カードの背景色を指定
+                  bg_color={card.props?.bg_color}
+                  // カードのテキスト色を指定
+                  font_color={card.props?.font_color}
+                  // テキストの配置（left/center/right）を型安全に変換
+                  align={safeAlign(card.props?.align)}
+                  // カードのメディア（画像等）を指定
+                  media={card.props?.media}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* ======================= */}
       </div>
     );
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div 
+      className={styles.wrapper}
+      style={{
+        fontFamily: globalFont,
+      }}
+    >
       {/* ===== Layout描画追加 ===== */}
       <LayoutComponent theme={layout.props?.theme} />
       {/* ========================== */}
@@ -217,7 +268,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
         // スライドモード（1ページのみ表示）
         <div className={styles.cardWrapper}>
           <TransitionComponent key={index} trigger={index} duration={300}>
-            {renderPage(currentPage)}
+            {renderPage(currentPage, index)}
           </TransitionComponent>
         </div>
       ) : (

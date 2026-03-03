@@ -7,6 +7,7 @@ import { StackCard } from "../Components/Cards/StackCard/StackCard";
 import { StepCircleCard } from "../Components/Cards/StepCircleCard/StepCircleCard";
 import { FlipCard } from "../Components/Cards/FlipCard/FlipCard";
 import { TitleCard } from "../Components/Cards/TitleCard/TitleCard";
+import { ProjectsListCard } from "../Components/Cards/ProjectsListCard/ProjectsListCard";
 
 export const CardConfig = {
   NormalCard: {
@@ -44,6 +45,10 @@ export const CardConfig = {
   TitleCard: { 
     component: TitleCard,
     label: "Title"
+  },
+  ProjectsListCard: { 
+    component: ProjectsListCard,
+    label: "ProjectsList"
   },
 } as const;
 

@@ -1,0 +1,30 @@
+.noteMarkerBox {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 20px 20px 0px 20px;
+    padding: 10px 32px;
+    border-radius: 16px;
+}
+
+.noteMarkerText {
+  margin: 0px;
+  display: inline-block;
+  position: relative;
+  font-size: 3rem;
+}
+
+.noteMarkerText::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0.5em;
+  left: -10px;
+  width: calc(100% + 20px);
+  background-color: #fff200; /* デフォルトマーカー色 */
+  opacity: 0.4;
+  border-radius: 4px;
+  z-index: -1;
+}

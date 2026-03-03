@@ -26,7 +26,7 @@ export const StackCard = ({
 
   // 改行区切りでミニカード化
   const items = content
-    .split("\n")
+    .split(":::")
     .map(l => l.trim())
     .filter(Boolean);
 

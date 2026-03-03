@@ -5,15 +5,15 @@ import { TapRipple } from "../Components/Cursors/TapRipple/TapRipple";
 import { Marker } from "../Components/Cursors/Marker/Marker";
 
 export const CursorConfig = {
-  laser: {
+  Laser: {
     component: Laser,
     label: "Laser",
   },
-  sparkle: {
+  Sparkle: {
     component: Sparkle,
     label: "Sparkle",
   },
-  glow: {
+  Glow: {
     component: Glow,
     label: "Glow",
   },

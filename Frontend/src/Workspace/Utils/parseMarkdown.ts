@@ -8,6 +8,7 @@ export interface Parsed {
 export interface ParsedMarkdown {
     meta: Record<string, string>;
     pages: Parsed[][];
+    pageTitles?: Parsed[]; // 追加
 }
 
 export const parseMarkdown = (raw: string): ParsedMarkdown => {
@@ -19,13 +20,53 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
 
     let meta: Record<string, string> = {};
     let pages: Parsed[][] = [];
+    let pageTitles: Parsed[] = []; // 追加
 
     pageSections.forEach((page, pageIndex) => {
 
         // =============================
+        // "> title align=left" 検出
+        // =============================
+        let titleType: string = "NormalTitle";
+        let titleContent: string | null = null;
+        let titleProps: Record<string, string> = {};
+
+        const pageLines = page.split('\n').map(l => l.trim());
+        // タイトル行を検出した場合、その行をページから除外する
+        let pageContent = page;
+
+        if (pageLines[0]?.startsWith('>')) {
+            const rawTitle = pageLines[0].slice(1).trim();
+            const parts = rawTitle.split(/\s+/);
+
+            titleType = parts[0] || "NormalTitle"; // デフォルト
+            let content = "";
+
+            parts.slice(1).forEach(p => {
+                if (p.includes("=")) {
+                const [key, value] = p.split("=");
+                titleProps[key] = value;
+                } else {
+                content += (content ? " " : "") + p;
+                }
+            });
+
+            // contents キーが指定されている場合、それを titleContent として使用
+            // ダブルクォートを除去
+            if (titleProps.contents) {
+                titleContent = titleProps.contents.replace(/^"|"$/g, '');
+            } else {
+                // contents キーがない場合は、引数後のテキストを使用
+                titleContent = content;
+            }
+            // タイトル行をページコンテンツから除外する
+            pageContent = pageLines.slice(1).join('\n');
+        }
+
+        // =============================
         // "---" でサブカードとして区切る
         // =============================
-        const sections = page.split('---').map(s => s.trim()).filter(Boolean);
+        const sections = pageContent.split('---').map(s => s.trim()).filter(Boolean);
 
         // 最初のページの最初のセクションをmetaとして扱う
         if (pageIndex === 0) {
@@ -83,8 +124,15 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
 
         if (subCards.length > 0) {
             pages.push(subCards);
+            // 追加
+            pageTitles.push({
+                type: titleType,
+                props: { ...titleProps, align: titleProps.align || "left" },
+                content: titleContent ?? "",
+            });
         }
     });
 
-    return { meta, pages };
+
+    return { meta, pages, pageTitles };
 };

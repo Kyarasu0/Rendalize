@@ -28,7 +28,7 @@ export const NormalCard = ({
 
     return (
     <div
-        className={`${styles.card} ${styles[align]} markdown`}
+        className={`${styles.card} ${styles[align]}`}
         style={style}
     >
         <ReactMarkdown>{content}</ReactMarkdown>
