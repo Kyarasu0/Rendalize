@@ -1,28 +1,32 @@
-// Markdownをカード単位に分割する簡易パーサ
+// \ListCardのような形式をバラすための構造体
 export interface Parsed {
     type: string;
     props?: Record<string, string>;
     content?: string;
+    settings?: string;
 }
 
+// マークダウンを構造分析するための構造体
 export interface ParsedMarkdown {
     meta: Record<string, string>;
     pages: Parsed[][];
     pageTitles?: Parsed[]; // 追加
 }
-
+// ==========================================================
+//         parseMarkdown(マークダウンファイルの内容)
+// ==========================================================
 export const parseMarkdown = (raw: string): ParsedMarkdown => {
 
-    // =============================
-    // "===" でページとして区切る
-    // =============================
-    const pageSections = raw.split('===').map(p => p.trim()).filter(Boolean);
+    // =============================================
+    // "===" でページとして区切る(MainCardを配列化)
+    // =============================================
+    const mainCardContens = raw.split('===').map(p => p.trim()).filter(Boolean);
 
     let meta: Record<string, string> = {};
     let pages: Parsed[][] = [];
     let pageTitles: Parsed[] = []; // 追加
 
-    pageSections.forEach((page, pageIndex) => {
+    mainCardContens.forEach((page, pageIndex) => {
 
         // =============================
         // "> title align=left" 検出
