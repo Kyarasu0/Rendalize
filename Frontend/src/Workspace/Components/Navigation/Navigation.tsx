@@ -14,6 +14,7 @@ interface Props {
   onPrev: () => void;
   onCursorChange: (cursor: string | null) => void;
   cursorOptions: string[];
+  isBlack: boolean;
 }
 
 export const Navigation = ({
@@ -21,9 +22,10 @@ export const Navigation = ({
   onPrev,
   onCursorChange,
   cursorOptions,
+  isBlack,
 }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isDark, setIsDark] = useState(true); // true:白文字, false:黒文字
+  const [isDark, setIsDark] = useState(isBlack); // true:白文字, false:黒文字
 
   const handleSelect = (type: string) => {
     onCursorChange(type === "none" ? null : type);

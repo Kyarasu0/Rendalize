@@ -1,20 +1,19 @@
 // \ListCardのような形式をバラすための構造体
-export interface subParsed {
+export interface Parsed {
     type?: string | null;
     props?: Record<string, string>;
     content?: string | null;
-    settings?: string;
 }
 
-export interface mainParsed {
-    cards: subParsed[];
-    pageTitle?: subParsed;
+export interface MainParsed {
+    cards: Parsed[];
+    pageTitle?: Parsed;
 }
 
 // マークダウンを構造分析するための構造体
 export interface ParsedMarkdown {
     meta: Record<string, string>;
-    contents: mainParsed[];
+    contents: MainParsed[];
 }
 
 // ==========================================================
@@ -30,12 +29,12 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
     let meta: Record<string, string> = {};
     // いらないかも: let cards: subParsed[][] = [];
     // いらないかも: let pageTitles: subParsed[] = [];
-    let mainParsedContents: mainParsed[] = [];
+    let mainParsedContents: MainParsed[] = [];
 
     mainCardContents.forEach((page) => {
 
         // 1ページをまとめる配列を用意
-        let subCardArray: subParsed[] = [];
+        let subCardArray: Parsed[] = [];
 
         // =============================
         // "#+ title" 検出

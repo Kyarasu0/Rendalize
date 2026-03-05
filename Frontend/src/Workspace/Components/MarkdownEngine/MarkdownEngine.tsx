@@ -1,154 +1,291 @@
 import { useEffect, useState } from "react";
-import { parseMarkdown } from "../../Utils/parseMarkdown";
-import styles from "./MarkdownEngine.module.css";
+// 型のインストール
 import type { Parsed } from "../../Utils/parseMarkdown";
-// Navigationの種類のimport
+import type { MainParsed } from "../../Utils/parseMarkdown";
+// Utilsインストール
+import { parseMarkdown } from "../../Utils/parseMarkdown";
+// CSSの読み込み
+import styles from "./MarkdownEngine.module.css";
+// UI
 import { Navigation } from "../Navigation/Navigation";
-// ===== Customsのimport追加 =====
+// Config
 import { CardConfig } from "../../Customs/CardConfig";
 import { LayoutConfig } from "../../Customs/LayoutConfig";
 import { TransitionConfig } from "../../Customs/TransitionConfig";
 import { CursorConfig } from "../../Customs/CursorConfig";
 import { TitleConfig } from "../../Customs/TitleConfig";
+import { SettingConfig } from "../../Customs/SettingConfig";
+import type { SettingKey } from "../../Customs/SettingConfig";
 
 interface Props {
   url: string;
   mode: "slide" | "web";
 }
 
+interface MarkdownMeta {
+  layout?: string;
+  transition?: string;
+  cursor?: string;
+  font?: string;
+  setting?: string;
+}
+
 export const MarkdownEngine = ({ url, mode }: Props) => {
-  // ========== Page ==========
-  const [pages, setPages] = useState<Parsed[][]>([]);
-  // ==========================
 
-  // 追加
-  // ========== Title ==========
-  const [pageTitles, setPageTitles] = useState<Parsed[]>([]);
-  // ===========================
-
-  // ========== Layout ===========
+  // ===============================
+  // State
+  // ===============================
   const [layout, setLayout] = useState<Parsed>({
     type: "Normal",
     props: { theme: "dark" },
   });
-  // =============================
 
-  // ========== Transition ===========
-  const [transition, setTransition] = useState<Parsed>({ type: "Fade" });
-  // =================================
+  const [setting, setSetting] = useState(
+    SettingConfig.ForWhiteSetting.setting
+  );
 
-  // ========== Cursor ===========
+  const [transition, setTransition] = useState<Parsed>({
+    type: "Fade",
+  });
+
+  // ページとページタイトルのペア取得
+  const [contents, setContents] = useState<MainParsed[]>([]);
+
   const [metaCursorOptions, setMetaCursorOptions] = useState<string[]>([]);
   const [activeCursor, setActiveCursor] = useState<string | null>(null);
-  // =============================
 
-  // スライドモード用の現在インデックス
   const [index, setIndex] = useState(0);
+  const [globalFont, setGlobalFont] = useState<string>();
 
-  // meta に font がある場合、state に保存
-  const [globalFont, setGlobalFont] = useState<string | undefined>(undefined);
 
-  // =========================
-  // Markdownをフェッチしてパース
-  // =========================
+  // ======================================================
+  // Markdown構造化後の読み込み処理
+  // ======================================================
+
   useEffect(() => {
-    fetch(url)
-      .then(res => res.text())
-      .then(raw => {
-        const parsed = parseMarkdown(raw);
-
-        // pages[][]の取得
-        setPages(parsed.pages ?? []);
-
-        // metaから引数付きのlayoutを取得
-        if (parsed.meta.layout) {
-          const parts = parsed.meta.layout.split(" ");
-          setLayout({
-            type: parts[0],
-            props: { theme: parts[1] },
-          });
-        }
-
-        // metaから引数付きのtransitionを取得
-        if (parsed.meta.transition) {
-          const parts = parsed.meta.transition.split(" ");
-          setTransition({
-            type: parts[0],
-            props: { theme: parts[1] },
-          });
-        }
-
-        // metaから最大3個までのカーソル取得
-        if (parsed.meta.cursor) {
-          const cursors = parsed.meta.cursor.split(" ").slice(0, 3);
-          setMetaCursorOptions(cursors);
-          setActiveCursor(cursors[0] ?? null);
-        } else {
-          setMetaCursorOptions([]);
-          setActiveCursor(null);
-        }
-
-        // 追加
-        setPageTitles(parsed.pageTitles ?? []);
-
-        if (parsed.meta.font) {
-          // "A B" の場合、スペースで分割して優先順に適用
-          const fonts = parsed.meta.font.split(/\s+/);
-          // CSS に適用する場合はカンマ区切りに
-          setGlobalFont(fonts.join(", "));
-        }
-
-        // URLが変わったらスライド位置もリセット
-        setIndex(0);
-      });
+    loadMarkdown();
   }, [url]);
 
-  // =========================
-  // キーボード操作（スライドモード用）
-  // =========================
+  const loadMarkdown = async () => {
+
+    // URLからマークダウンファイルの内容を構造化して取得
+    const res = await fetch(url);
+    const raw = await res.text();
+    const parsed = parseMarkdown(raw);
+
+    // meta設定
+    applyMetaSettings(parsed.meta);
+
+    // ページとタイトルの取得
+    setContents(parsed.contents);
+
+    // スライド位置リセット
+    setIndex(0);
+
+  };
+
+
+  // ======================================================
+  // meta設定の処理
+  // ======================================================
+
+  const applyMetaSettings = (meta: MarkdownMeta) => {
+
+    // Layout
+    if (meta.layout) {
+      const [type, theme] = meta.layout.split(" ");
+      setLayout({
+        type,
+        props: { theme },
+      });
+    }
+
+    // Transition
+    if (meta.transition) {
+      const [type, theme] = meta.transition.split(" ");
+      setTransition({
+        type,
+        props: { theme },
+      });
+    }
+
+    // Cursor
+    if (meta.cursor) {
+      const cursors = meta.cursor.split(" ").slice(0, 3);
+      setMetaCursorOptions(cursors);
+      setActiveCursor(cursors[0] ?? null);
+    } else {
+      setMetaCursorOptions([]);
+      setActiveCursor(null);
+    }
+
+    // Font
+    if (meta.font) {
+      const fonts = meta.font.split(/\s+/);
+      setGlobalFont(fonts.join(", "));
+    }
+
+    // Setting
+    if (meta.setting && meta.setting in SettingConfig) {
+      const config = SettingConfig[meta.setting as SettingKey];
+
+      if (config) {
+        setSetting(config.setting);
+      }
+    }
+  };
+
+
+  // ======================================================
+  // キーボード操作
+  // ======================================================
+
   useEffect(() => {
+
     const handler = (e: KeyboardEvent) => {
+
       if (mode !== "slide") return;
 
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") nextPage();
+      if (e.key === "ArrowLeft") prevPage();
+
     };
 
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [pages, index, mode]);
 
-  // =========================
-  // カード切り替え（ページ単位）
-  // =========================
-  const handleNext = () => {
-    if (index >= pages.length - 1) return;
+    return () => window.removeEventListener("keydown", handler);
+
+  }, [mode, contents.length, index]);
+
+
+  // ======================================================
+  // ページ移動
+  // ======================================================
+
+  const nextPage = () => {
+    if (index >= contents.length - 1) return;
     setIndex(i => i + 1);
   };
 
-  const handlePrev = () => {
+  const prevPage = () => {
     if (index <= 0) return;
     setIndex(i => i - 1);
   };
 
-  // ===== カーソル制御 =====
+
+  // ======================================================
+  // Cursor制御
+  // ======================================================
+
   useEffect(() => {
-    if (activeCursor) {
-      document.body.style.cursor = "none";
-    } else {
-      document.body.style.cursor = "auto";
-    }
+
+    document.body.style.cursor = activeCursor ? "none" : "auto";
 
     return () => {
       document.body.style.cursor = "auto";
     };
+
   }, [activeCursor]);
 
-  // =========================
-  // 現在表示するページ
-  // =========================
-  const currentPage = pages[index];
-  if (!currentPage) return null;
+
+  // ======================================================
+  // alignの強制
+  // ======================================================
+
+  const safeAlign = (
+    value?: string
+  ): "left" | "center" | "right" => {
+
+    if (value === "center" || value === "right") {
+      return value;
+    }
+
+    return "left";
+  };
+
+
+  // ======================================================
+  // Page描画
+  // ======================================================
+
+  const renderPage = (page: MainParsed) => {
+
+    // カードとタイトルの設定
+    const cards = page.cards;
+    const title = page.pageTitle;
+
+    // subカードの枚数
+    const subCount = cards.length;
+
+    // 指定されたタイトルコンポーネントの指定
+    const TitleComponent = title
+      ? TitleConfig[title.type as keyof typeof TitleConfig]?.component
+      : null;
+
+    return (
+      
+      <div className={styles.MainCard}>
+
+        {/* ======================
+            Page Title
+        ====================== */}
+
+        {title?.content && TitleComponent && (
+          <TitleComponent
+            {...title.props}
+            content={title.content}
+          />
+        )}
+
+
+        {/* ======================
+            Sub Cards
+        ====================== */}
+
+        <div className={styles.SubCards}>
+
+          {cards.map((card, i) => {
+
+            const CardComponent =
+              CardConfig[card.type as keyof typeof CardConfig]?.component ??
+              CardConfig.NormalCard.component;
+
+            const width =
+              card.props?.width ??
+              (subCount > 0 ? `${100 / subCount}%` : "100%");
+
+            return (
+              <div
+                key={i}
+                className={styles.SubCardWrapper}
+
+                /* widthを基準にするが必要なら縮む */
+                style={{ flex: `0 1 ${width}` }}
+              >
+                <CardComponent
+                  content={card.content ?? ""}
+                  bg_color={card.props?.bg_color}
+                  font_color={card.props?.font_color}
+                  align={safeAlign(card.props?.align)}
+                  media={card.props?.media}
+                />
+              </div>
+            );
+
+          })}
+
+        </div>
+
+      </div>
+
+    );
+
+  };
+
+
+  // ======================================================
+  // Configからコンポーネント取得
+  // ======================================================
 
   const LayoutComponent =
     LayoutConfig[layout.type as keyof typeof LayoutConfig]?.component ??
@@ -158,135 +295,93 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
     TransitionConfig[transition.type as keyof typeof TransitionConfig]?.component ??
     TransitionConfig.Fade.component;
 
-  // ===== align型ガード =====
-  const safeAlign = (
-    value?: string
-  ): "left" | "center" | "right" | undefined => {
-    if (value === "left" || value === "center" || value === "right") {
-      return value;
-    }
-    return "left";
-  };
-  // =========================
 
-  // =========================
-  // ページ描画関数（サブカード横詰め）
-  // =========================
-  const renderPage = (page: Parsed[], pageIndex: number) => {
-    const subCount = page.length;
-    // 現在のページに対応するタイトル情報を取得
-    const title = pageTitles[pageIndex];
-    
-    // ===== このページのタイトルコンポーネントを動的に取得 =====
-    // pageIndexに対応するタイトル情報から、指定されたタイプのコンポーネントを取得
-    // デフォルトはNormalTitleコンポーネントを使用
-    const PageTitleComponent = title
-      ? TitleConfig[title.type as keyof typeof TitleConfig]?.component ??
-        TitleConfig.NormalTitle?.component
-      : null;
-    // =======================================================
+  // ======================================================
+  // 現在ページ
+  // ======================================================
 
-    return (
-      <div key={pageIndex} className={styles.MainCard}>
-        {/* ===== タイトル領域 ===== */}
-        {/* タイトルコンテンツがある場合のみ描画 */}
-        {title?.content && PageTitleComponent && (
-          <PageTitleComponent
-            // タイトルのプロパティ（align等）を展開
-            {...title.props}
-            // タイトルのテキストコンテンツを指定
-            content={title.content}
-          />
-        )}
-        {/* ====================== */}
+  const currentPage = contents[index];
+  if (!currentPage) return null;
 
-        {/* ===== サブカード領域 ===== */}
-        <div className={styles.SubCards}>
-          {page.map((card, i) => {
-            // CardConfigから現在のカードタイプに対応するコンポーネントを取得
-            // デフォルトはNormalCardコンポーネントを使用
-            const CardComp =
-              CardConfig[card.type as keyof typeof CardConfig]?.component ??
-              CardConfig.NormalCard.component;
 
-            // カード幅をプロパティから取得、未指定の場合は均等配分
-            const width = card.props?.width ?? `${100 / subCount}%`;
-
-            return (
-              <div
-                key={i}
-                className={styles.SubCardWrapper}
-                style={{ flex: `0 0 ${width}` }}
-              >
-                <CardComp
-                  // カードのテキストコンテンツを指定
-                  content={card.content ?? ""}
-                  // カードの背景色を指定
-                  bg_color={card.props?.bg_color}
-                  // カードのテキスト色を指定
-                  font_color={card.props?.font_color}
-                  // テキストの配置（left/center/right）を型安全に変換
-                  align={safeAlign(card.props?.align)}
-                  // カードのメディア（画像等）を指定
-                  media={card.props?.media}
-                />
-              </div>
-            );
-          })}
-        </div>
-        {/* ======================= */}
-      </div>
-    );
-  };
+  // ======================================================
+  // Render
+  // ======================================================
 
   return (
-    <div 
+
+    <div
       className={styles.wrapper}
       style={{
         fontFamily: globalFont,
+        fontSize: setting.body.fontSize
       }}
     >
-      {/* ===== Layout描画追加 ===== */}
+
+      {/* ======================
+          Layout
+      ====================== */}
+
       <LayoutComponent theme={layout.props?.theme} />
-      {/* ========================== */}
 
-      {/* ===== Cursor描画追加 ===== */}
-      {activeCursor &&
-        (() => {
-          const config =
-            CursorConfig[activeCursor as keyof typeof CursorConfig];
-          if (!config) return null;
-          const CursorComp = config.component;
-          return <CursorComp />;
-        })()}
-      {/* ========================== */}
 
-      {/* =========================
-          描画切り替え
-      ========================= */}
+      {/* ======================
+          Cursor
+      ====================== */}
+
+      {activeCursor && (() => {
+
+        const config =
+          CursorConfig[activeCursor as keyof typeof CursorConfig];
+
+        if (!config) return null;
+
+        const Cursor = config.component;
+
+        return <Cursor />;
+
+      })()}
+
+
+      {/* ======================
+          Page Rendering
+      ====================== */}
+
       {mode === "slide" ? (
-        // スライドモード（1ページのみ表示）
+
         <div className={styles.cardWrapper}>
+
           <TransitionComponent key={index} trigger={index} duration={300}>
-            {renderPage(currentPage, index)}
+            {renderPage(currentPage)}
           </TransitionComponent>
+
         </div>
+
       ) : (
-        // Webモード（全ページ縦表示）
-        pages.map((page, i) => renderPage(page, i))
+
+        contents.map((page) => renderPage(page))
+
       )}
 
-      {/* =========================
-          ナビゲーション（スライド時のみ）
-      ========================= */}
-      {mode === "slide" && pages.length > 1 && (
+
+      {/* ======================
+          Navigation
+      ====================== */}
+
+      {mode === "slide" && contents.length > 1 && (
+
         <Navigation
-          onNext={handleNext}
-          onPrev={handlePrev}
+          onNext={nextPage}
+          onPrev={prevPage}
           onCursorChange={setActiveCursor}
           cursorOptions={metaCursorOptions}
+          isBlack={setting.theme === "black"}
         />
+
       )}
+
     </div>
+
   );
+
 };
