@@ -4,7 +4,7 @@ import { COLORS } from "../Colors/ForWhiteBg"
 export const ForWhiteSetting = {
   theme: "white",
   color: COLORS,
-  title: "NoteMarker",
+  title: "NoteMarkerTitle",
   h1: {
     fontSize: "3rem",
     fontWeight: 700,
@@ -21,6 +21,6 @@ export const ForWhiteSetting = {
     fontSize: "18px",
   },
   pipelines: [
-    "NormalCard"
+    "cardPipeline"
   ]
 };

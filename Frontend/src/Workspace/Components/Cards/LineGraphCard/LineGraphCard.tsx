@@ -1,5 +1,4 @@
 import styles from "./LineGraphCard.module.css";
-import { Activity } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 interface Props {
@@ -9,6 +8,7 @@ interface Props {
   stroke_color_start?: string;
   stroke_color_end?: string;
   path_d?: string; // SVG path
+  color?: Record<string, string>;
 }
 
 export const LineGraphCard = ({

@@ -1,36 +1,85 @@
 // ==========================================================
-//        Pipelineの型
+// Pipelineが受け取るデータ
 // ==========================================================
 
-// pipelineが受け取るデータ
 export interface PipelineInput {
-    content: string;
+  content: string
 }
 
-// pipelineが返すデータ
-export interface PipelineOutput {
-    type: string;
-    props?: Record<string, any>;
-    content?: string;
+
+// ==========================================================
+// Pipelineが返すデータ
+// ==========================================================
+
+export interface ElementNode {
+
+  // 要素の種類
+  // ElementConfig に定義されている type のいずれか
+  type: string
+
+  // props
+  props?: Record<string, any>
+
+  // 中身
+  content: any
 }
 
-// "関数型"を定義する
-export type Pipeline = (input: PipelineInput) => PipelineOutput | null;
 
-// ===========================
-//         runPipeline
-// ===========================
+// ==========================================================
+// Pipeline関数の型
+// ==========================================================
+
+export type Pipeline = (input: PipelineInput) => ElementNode[]
+
+
+// ==========================================================
+// pipeline実行関数
+// ==========================================================
+// markdown タイプのみがパイプラインで処理対象
+// image などはそのまま通す
+
 export const runPipelines = (
-    content: any,
-    pipelines: Pipeline[]
-) => {
+  content: string,
+  pipelines: Pipeline[]
+): ElementNode[] => {
 
-    let result = content;
+  let result: ElementNode[] = [
+    {
+      type: "markdown",
+      content
+    }
+  ]
 
-    for (const pipeline of pipelines) {
-        result = pipeline(result);
+  // pipelineを順番に実行
+  for (const pipeline of pipelines) {
+
+    const newResult: ElementNode[] = []
+
+    for (const node of result) {
+
+      // markdown タイプだけpipeline対象
+      // 他の type (image など) はそのまま通す
+      if (node.type === "markdown") {
+
+        const converted = pipeline({
+          content: node.content
+        })
+
+        newResult.push(...converted)
+
+      } else {
+
+        // markdown 以外はそのまま
+        newResult.push(node)
+
+      }
+
     }
 
-    return result;
+    result = newResult
 
-};
+  }
+
+  return result
+
+}

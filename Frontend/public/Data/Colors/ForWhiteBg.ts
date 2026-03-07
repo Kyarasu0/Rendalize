@@ -4,5 +4,6 @@ export const COLORS = {
     green: '#79fd8d',
     white: '#eef2f8',
     black: '#333',
-    grid: 'rgba(0,0,0,0.2)'
+    shadow: 'rgba(0,0,0,0.2)',
+    grid: 'rgba(255,255,255,0.2)'
 };

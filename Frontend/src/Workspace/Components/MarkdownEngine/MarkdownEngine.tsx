@@ -4,18 +4,20 @@ import type { Parsed } from "../../Utils/parseMarkdown";
 import type { MainParsed } from "../../Utils/parseMarkdown";
 // Utilsインストール
 import { parseMarkdown } from "../../Utils/parseMarkdown";
+import { runPipelines } from "../../Utils/runPipelines";
 // CSSの読み込み
 import styles from "./MarkdownEngine.module.css";
 // UI
 import { Navigation } from "../Navigation/Navigation";
 // Config
-import { CardConfig } from "../../Customs/CardConfig";
 import { LayoutConfig } from "../../Customs/LayoutConfig";
 import { TransitionConfig } from "../../Customs/TransitionConfig";
 import { CursorConfig } from "../../Customs/CursorConfig";
 import { TitleConfig } from "../../Customs/TitleConfig";
 import { SettingConfig } from "../../Customs/SettingConfig";
 import type { SettingKey } from "../../Customs/SettingConfig";
+import { getPipelines } from "../../Customs/PipelineConfig";
+import { ElementConfig } from "../../Customs/ElementConfig";
 
 interface Props {
   url: string;
@@ -189,22 +191,6 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
 
   // ======================================================
-  // alignの強制
-  // ======================================================
-
-  const safeAlign = (
-    value?: string
-  ): "left" | "center" | "right" => {
-
-    if (value === "center" || value === "right") {
-      return value;
-    }
-
-    return "left";
-  };
-
-
-  // ======================================================
   // Page描画
   // ======================================================
 
@@ -219,8 +205,14 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
     // 指定されたタイトルコンポーネントの指定
     const TitleComponent = title
-      ? TitleConfig[title.type as keyof typeof TitleConfig]?.component
+      ? TitleConfig[setting.title as keyof typeof TitleConfig]?.component
       : null;
+
+    // パイプラインの取得
+    // 文字列配列の取得
+    const pipelineNames = (setting.pipelines as string[]) ?? [];
+    // 関数配列に変換
+    const pipelines = getPipelines(pipelineNames);
 
     return (
       
@@ -245,10 +237,8 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
         <div className={styles.SubCards}>
 
           {cards.map((card, i) => {
-
-            const CardComponent =
-              CardConfig[card.type as keyof typeof CardConfig]?.component ??
-              CardConfig.NormalCard.component;
+            // card.content をパイプラインで処理
+            const elements = runPipelines(card.content ?? "", pipelines);
 
             const width =
               card.props?.width ??
@@ -262,13 +252,22 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
                 /* widthを基準にするが必要なら縮む */
                 style={{ flex: `0 1 ${width}` }}
               >
-                <CardComponent
-                  content={card.content ?? ""}
-                  bg_color={card.props?.bg_color}
-                  font_color={card.props?.font_color}
-                  align={safeAlign(card.props?.align)}
-                  media={card.props?.media}
-                />
+                {elements.map((element, eIdx) => {
+                  // ElementConfig からコンポーネントを取得
+                  const config =
+                    ElementConfig[element.type as keyof typeof ElementConfig];
+                  const Component = config?.component;
+
+                  if (!Component) return null;
+
+                  return (
+                    <Component
+                      key={eIdx}
+                      {...element}
+                      color={setting.color}
+                    />
+                  );
+                })}
               </div>
             );
 

@@ -1,118 +1,165 @@
-import type { Parsed } from "../Utils/parseMarkdown";
+import type { Pipeline, ElementNode } from "../Utils/runPipelines";
 
 /**
- * NormalCard 用の pipeline
+ * Card マークダウン要素の検出・変換パイプライン
  *
  * 役割
+ * - \CardType のような記法を検出する
  * - props を安全な形に整形する
  * - 不正な値を除去する
  * - デフォルト値を補完する
  */
-export const normalCardPipeline = (card: Parsed): Parsed => {
+export const cardPipeline: Pipeline = ({ content }) => {
 
-  // ====================================
-  // NormalCard 以外は処理しない
-  // ====================================
-  if (card.type !== "NormalCard") return card;
+  // カード記法が無い場合は、コンテンツの内容によって適切な要素タイプを決定
+  // \ListCard align=left のような形式を探す
+  const cardMatch = content.match(/^\\(\w+)(?:\s+(.*))?$/m);
 
-  // props が undefined の可能性があるので空オブジェクトで補完
-  const props = card.props ?? {};
+  if (!cardMatch) {
+    // カード記法が無い場合、コンテンツの内容で判定
+    if (content.trim().startsWith('#')) {
+      // # で始まる場合はタイトル要素
+      return [
+        {
+          type: "title",
+          content
+        }
+      ];
+    } else if (content.trim().startsWith('- ')) {
+      // - で始まる場合はリスト要素
+      return [
+        {
+          type: "list",
+          content
+        }
+      ];
+    } else {
+      // それ以外は通常要素
+      return [
+        {
+          type: "normal",
+          content
+        }
+      ];
+    }
+  }
 
+  const cardType = cardMatch[1];
+  const argsStr = cardMatch[2] ?? "";
 
+  // args を パース: align=left bg_color=#fff みたいなのを {align: "left", bg_color: "#fff"} に
+  const props: Record<string, string> = {};
+  const argParts = argsStr.split(/\s+/);
+
+  argParts.forEach((part: string) => {
+    if (part.includes("=")) {
+      const [key, value] = part.split("=");
+      if (key && value) {
+        props[key] = value;
+      }
+    }
+  });
 
   // ====================================
   // align の正規化
   // ====================================
-  // 許可する値
-  // left / center / right
-  // それ以外は left にする
-
   let align: "left" | "center" | "right" = "left";
-
   if (props.align === "center" || props.align === "right") {
     align = props.align;
   }
 
-
-
   // ====================================
   // width の正規化
   // ====================================
-  // Markdownでは
-  //
-  // width=50
-  //
-  // のように書けるようにする
-  // → 50% に変換
-
   let width: string | undefined = props.width;
   if (width) {
-
     // 50 → 50%
     if (/^\d+$/.test(width)) {
       width = `${width}%`;
     }
-
     // 50% → そのまま
     else if (/^\d+%$/.test(width)) {
       width = width;
     }
-
     // 不正値 → 削除
     else {
       width = undefined;
     }
-
   }
-
-
 
   // ====================================
   // その他 props
   // ====================================
-  // 指定されている場合のみ残す
-
   const bg_color = props.bg_color ?? undefined;
   const font_color = props.font_color ?? undefined;
   const media = props.media ?? undefined;
 
-
-
   // ====================================
-  // props を整理して返す
+  // props を整理
   // ====================================
-
-  const newProps: Record<string, string> = {
+  const normalizedProps: Record<string, string> = {
     ...props,
     align
   };
 
-  // width が存在する場合のみ追加
   if (width) {
-    newProps.width = width;
+    normalizedProps.width = width;
   }
 
   if (bg_color) {
-    newProps.bg_color = bg_color;
+    normalizedProps.bg_color = bg_color;
   }
 
   if (font_color) {
-    newProps.font_color = font_color;
+    normalizedProps.font_color = font_color;
   }
 
   if (media) {
-    newProps.media = media;
+    normalizedProps.media = media;
   }
 
-
+  // ====================================
+  // カードタイプを要素タイプにマッピング
+  // ====================================
+  let elementType: string;
+  switch (cardType.toLowerCase()) {
+    case 'listcard':
+      elementType = 'list';
+      break;
+    case 'titlecard':
+      elementType = 'title';
+      break;
+    case 'normalcard':
+      elementType = 'normal';
+      break;
+    case 'stackcard':
+      elementType = 'stack';
+      break;
+    case 'timelinecard':
+      elementType = 'timeline';
+      break;
+    case 'stepcirclecard':
+      elementType = 'stepcircle';
+      break;
+    case 'projectslistcard':
+      elementType = 'projects';
+      break;
+    default:
+      elementType = 'normal'; // デフォルトは通常要素
+  }
 
   // ====================================
-  // 新しいカードを返す
+  // ElementNode として返す
   // ====================================
+  // カード記法より後の内容が要素の中身
+  const elementContent = content.slice(cardMatch[0].length).trim();
 
-  return {
-    ...card,
-    props: newProps
+  const result: ElementNode = {
+    type: elementType,
+    props: normalizedProps,
+    content: elementContent
   };
+
+  return [result];
 
 };

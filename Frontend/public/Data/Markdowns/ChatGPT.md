@@ -6,7 +6,7 @@ setting: ForWhiteSetting
 ===
 \NormalCard width=70%
 
-#+ NormalTitle align=center
+#+ NormalTitle align=left font_color=black
 
 # MarkdownEngine Demo
 

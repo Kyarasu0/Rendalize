@@ -7,7 +7,7 @@ interface Props {
   align?: "left" | "center" | "right";
   bg_color?: string;
   font_color?: string;
-  width?: string;
+  color?: Record<string, string>;
 }
 
 export const FlipCard = ({
@@ -15,11 +15,9 @@ export const FlipCard = ({
   align = "center",
   bg_color = "rgba(30,41,59,0.8)",
   font_color = "white",
-  width = "100%",
 }: Props) => {
 
   const style: React.CSSProperties = {
-    width,
     textAlign: align,
     color: font_color,
   };

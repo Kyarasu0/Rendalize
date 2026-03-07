@@ -14,42 +14,42 @@ export const CardConfig = {
     component: NormalCard,
     label: "Normal",
   },
-  ListCard: { 
-    component: ListCard,
-    label: "List" 
-  },
-  MediaCard: { 
-    component: MediaCard,
-    label: "Media"
-  },
-  TimelineCard: { 
-    component: TimelineCard,
-    label: "Timeline"
-  },
-  LineGraphCard: { 
-    component: LineGraphCard,
-    label: "LineGraph"
-  },
-  StackCard: { 
-    component: StackCard,
-    label: "Stack"
-  },
-  StepCircleCard: { 
-    component: StepCircleCard,
-    label: "StepCircle"
-  },
-  FlipCard: { 
-    component: FlipCard,
-    label: "Flip"
-  },
-  TitleCard: { 
-    component: TitleCard,
-    label: "Title"
-  },
-  ProjectsListCard: { 
-    component: ProjectsListCard,
-    label: "ProjectsList"
-  },
+  // ListCard: { 
+  //   component: ListCard,
+  //   label: "List" 
+  // },
+  // MediaCard: { 
+  //   component: MediaCard,
+  //   label: "Media"
+  // },
+  // TimelineCard: { 
+  //   component: TimelineCard,
+  //   label: "Timeline"
+  // },
+  // LineGraphCard: { 
+  //   component: LineGraphCard,
+  //   label: "LineGraph"
+  // },
+  // StackCard: { 
+  //   component: StackCard,
+  //   label: "Stack"
+  // },
+  // StepCircleCard: { 
+  //   component: StepCircleCard,
+  //   label: "StepCircle"
+  // },
+  // FlipCard: { 
+  //   component: FlipCard,
+  //   label: "Flip"
+  // },
+  // TitleCard: { 
+  //   component: TitleCard,
+  //   label: "Title"
+  // },
+  // ProjectsListCard: { 
+  //   component: ProjectsListCard,
+  //   label: "ProjectsList"
+  // },
 } as const;
 
 

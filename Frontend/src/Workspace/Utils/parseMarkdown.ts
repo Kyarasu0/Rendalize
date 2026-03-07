@@ -3,6 +3,7 @@ export interface Parsed {
     type?: string | null;
     props?: Record<string, string>;
     content?: string | null;
+    setting?: Record<string, string>;
 }
 
 export interface MainParsed {
