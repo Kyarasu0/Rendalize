@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 // 型のインストール
 import type { Parsed } from "../../Utils/parseMarkdown";
 import type { MainParsed } from "../../Utils/parseMarkdown";
+import type { SettingKey } from "../../Customs/SettingConfig";
+import type { PipelineKey } from "../../Customs/PipelineConfig";
 // Utilsインストール
 import { parseMarkdown } from "../../Utils/parseMarkdown";
 import { runPipelines } from "../../Utils/runPipelines";
@@ -15,8 +17,7 @@ import { TransitionConfig } from "../../Customs/TransitionConfig";
 import { CursorConfig } from "../../Customs/CursorConfig";
 import { TitleConfig } from "../../Customs/TitleConfig";
 import { SettingConfig } from "../../Customs/SettingConfig";
-import type { SettingKey } from "../../Customs/SettingConfig";
-import { getPipelines } from "../../Customs/PipelineConfig";
+import { PipelineConfig } from "../../Customs/PipelineConfig";
 import { ElementConfig } from "../../Customs/ElementConfig";
 
 interface Props {
@@ -128,6 +129,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
     }
 
     // Setting
+    // meta.settingという項目が用意されているか、meta.settingがSettingConfig内に設定されているか
     if (meta.setting && meta.setting in SettingConfig) {
       const config = SettingConfig[meta.setting as SettingKey];
 
@@ -208,11 +210,14 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
       ? TitleConfig[setting.title as keyof typeof TitleConfig]?.component
       : null;
 
-    // パイプラインの取得
-    // 文字列配列の取得
-    const pipelineNames = (setting.pipelines as string[]) ?? [];
-    // 関数配列に変換
-    const pipelines = getPipelines(pipelineNames);
+    // ======================
+    // Pipeline設定取得
+    // ======================
+    // パイプライン名を示す文字列を実際の関数に変換
+    const pipelinePairs = setting.pipelines.map(p => ({
+      pipeline: PipelineConfig[p.pipeline as PipelineKey],
+      render: p.render
+    }))
 
     return (
       
@@ -222,6 +227,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
             Page Title
         ====================== */}
 
+        {/* title.contentが存在し、TitleComponentが存在したらコンポーネントを表示 */}
         {title?.content && TitleComponent && (
           <TitleComponent
             {...title.props}
@@ -238,7 +244,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
           {cards.map((card, i) => {
             // card.content をパイプラインで処理
-            const elements = runPipelines(card.content ?? "", pipelines);
+            const elements = runPipelines(card.content ?? "", pipelinePairs);
 
             const width =
               card.props?.width ??

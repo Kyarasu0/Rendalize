@@ -6,10 +6,8 @@
 // 文字列で指定されたパイプラインを実際の関数に変換するため
 // ============================================
 
-import type { Pipeline } from "../Utils/runPipelines";
-import { cardPipeline } from "../Pipelines/cardPipeline";
 import { imagePipeline } from "../Pipelines/imagePipeline";
-import { projectsListPipeline } from "../Pipelines/projectsListPipeline";
+import { listPipeline } from "../Pipelines/listPipeline";
 
 // ============================================
 // PipelineConfig
@@ -18,9 +16,8 @@ import { projectsListPipeline } from "../Pipelines/projectsListPipeline";
 // ============================================
 
 export const PipelineConfig = {
-  cardPipeline,
   imagePipeline,
-  projectsListPipeline,
+  listPipeline,
 } as const;
 
 // ============================================
@@ -30,13 +27,3 @@ export const PipelineConfig = {
 // ============================================
 
 export type PipelineKey = keyof typeof PipelineConfig;
-
-// ============================================
-// パイプライン名の配列からパイプライン関数を取得
-// ============================================
-
-export const getPipelines = (pipelineNames: string[]): Pipeline[] => {
-  return pipelineNames
-    .map(name => PipelineConfig[name as PipelineKey])
-    .filter((pipeline): pipeline is Pipeline => Boolean(pipeline));
-};

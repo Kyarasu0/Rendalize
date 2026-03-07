@@ -21,6 +21,9 @@ export const ForWhiteSetting = {
     fontSize: "18px",
   },
   pipelines: [
-    "cardPipeline"
+    {
+      pipeline: "listPipeline",
+      render: "CheckList"
+    }
   ]
 };

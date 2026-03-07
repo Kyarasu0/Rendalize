@@ -14,15 +14,9 @@
 // ============================================
 
 import type { ElementNode } from "../Utils/runPipelines";
-import { Image } from "../Components/Elements/Image";
-import { Markdown } from "../Components/Elements/Markdown";
-import { ListElement } from "../Components/Elements/ListElement";
-import { TitleElement } from "../Components/Elements/TitleElement";
-import { NormalElement } from "../Components/Elements/NormalElement";
-import { ProjectsListElement } from "../Components/Elements/ProjectsListElement";
-import { TimelineElement } from "../Components/Elements/TimelineElement";
-import { StackElement } from "../Components/Elements/StackElement";
-import { StepCircleElement } from "../Components/Elements/StepCircleElement";
+import { Image } from "../Components/Elements/Image/Image";
+import { CheckList } from "../Components/Elements/CheckList/CheckList";
+import { Text } from "../Components/Elements/Text/Text";
 
 export interface ElementComponent {
   component: (props: ElementNode & { color?: any }) => React.ReactNode;
@@ -38,29 +32,11 @@ export const ElementConfig = {
   image: {
     component: Image,
   },
-  markdown: {
-    component: Markdown,
+  CheckList: {
+    component: CheckList,
   },
-  list: {
-    component: ListElement,
-  },
-  title: {
-    component: TitleElement,
-  },
-  normal: {
-    component: NormalElement,
-  },
-  projects: {
-    component: ProjectsListElement,
-  },
-  timeline: {
-    component: TimelineElement,
-  },
-  stack: {
-    component: StackElement,
-  },
-  stepcircle: {
-    component: StepCircleElement,
+  text: {
+    component: Text,
   },
 } as const;
 

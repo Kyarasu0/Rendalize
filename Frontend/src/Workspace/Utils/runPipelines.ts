@@ -12,16 +12,14 @@ export interface PipelineInput {
 // ==========================================================
 
 export interface ElementNode {
-
-  // 要素の種類
-  // ElementConfig に定義されている type のいずれか
   type: string
-
-  // props
   props?: Record<string, any>
+  content: string | ElementNode[]
+}
 
-  // 中身
-  content: any
+export interface PipelinePair {
+  pipeline: Pipeline
+  render: string
 }
 
 
@@ -29,7 +27,7 @@ export interface ElementNode {
 // Pipeline関数の型
 // ==========================================================
 
-export type Pipeline = (input: PipelineInput) => ElementNode[]
+export type Pipeline = (nodes: ElementNode[]) => ElementNode[]
 
 
 // ==========================================================
@@ -40,46 +38,32 @@ export type Pipeline = (input: PipelineInput) => ElementNode[]
 
 export const runPipelines = (
   content: string,
-  pipelines: Pipeline[]
+  pipelinePairs: PipelinePair[]
 ): ElementNode[] => {
 
-  let result: ElementNode[] = [
-    {
-      type: "markdown",
-      content
-    }
+  let nodes: ElementNode[] = [
+    { type: "text", content }
   ]
 
-  // pipelineを順番に実行
-  for (const pipeline of pipelines) {
+  for (const pair of pipelinePairs) {
 
-    const newResult: ElementNode[] = []
+    // 1つのパイプラインを実行する
+    const result = pair.pipeline(nodes)
 
-    for (const node of result) {
+    // その1つのパイプラインによって編集された部分に対して描画タイプをくっつける
+    nodes = result.map(node => {
 
-      // markdown タイプだけpipeline対象
-      // 他の type (image など) はそのまま通す
-      if (node.type === "markdown") {
-
-        const converted = pipeline({
-          content: node.content
-        })
-
-        newResult.push(...converted)
-
-      } else {
-
-        // markdown 以外はそのまま
-        newResult.push(node)
-
+      if (node.type !== "text") {
+        return {
+          ...node,
+          type: pair.render
+        }
       }
 
-    }
-
-    result = newResult
+      return node
+    })
 
   }
 
-  return result
-
+  return nodes
 }

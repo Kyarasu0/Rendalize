@@ -21,6 +21,7 @@ export interface ParsedMarkdown {
 //         parseMarkdown(マークダウンファイルの内容)
 // ==========================================================
 export const parseMarkdown = (raw: string): ParsedMarkdown => {
+    console.log("マークダウンの中身: ", raw);
 
     // =============================================
     // "===" でページとして区切る(MainCardを配列化)
@@ -28,8 +29,6 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
     const mainCardContents = raw.split('===').map(p => p.trim()).filter(Boolean);
 
     let meta: Record<string, string> = {};
-    // いらないかも: let cards: subParsed[][] = [];
-    // いらないかも: let pageTitles: subParsed[] = [];
     let mainParsedContents: MainParsed[] = [];
 
     mainCardContents.forEach((page) => {
@@ -56,7 +55,6 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
                 // タイトル内容と引数部分取得 ["Title", "align=left", ...]
                 const parts = rawTitle.split(/\s+/);
 
-                // いらないかも: titleType = parts[0] || "NormalTitle"; // デフォルト
                 // 内容の初期値
                 let content = "";
 
@@ -81,6 +79,7 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
         // titleProps: {key: string, value: string}にはタイトルの引数
         // pageContent: stringにはタイトルを省いた部分全部
         pageContent = pageContentArray.join('\n');
+        console.log("タイトル以外の内容: ", pageContent);
 
         // =============================
         //         meta情報を分解
@@ -122,7 +121,6 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
                     // タイトル内容と引数部分取得 ["ListCard", "align=left", ...]
                     const parts = rawCommand.split(/\s+/);
 
-                    // いらないかも: titleType = parts[0] || "NormalTitle"; // デフォルト
                     // 内容の初期値
                     let content = "";
 

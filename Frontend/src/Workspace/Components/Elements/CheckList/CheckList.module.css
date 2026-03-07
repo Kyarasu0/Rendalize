@@ -1,0 +1,22 @@
+.container {
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.text {
+  flex: 1;
+}
