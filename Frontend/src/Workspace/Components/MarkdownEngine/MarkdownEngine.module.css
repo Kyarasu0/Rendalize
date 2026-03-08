@@ -54,7 +54,7 @@
 
   /* 大きさ設定 */
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   box-sizing: border-box;
 
   /* 余白設定 */
@@ -75,12 +75,13 @@
 
 .SubCards {
 
-  /* カード間隔 */
-  gap: 20px;
-
-  /* 横並び */
+  /* 要素配置設定 */
   display: flex;
   flex-direction: row;
+  align-items: center;
+
+  /* カード間隔 */
+  gap: 20px;
 
   /* 残り高さを使う */
   flex: 1;
@@ -96,9 +97,14 @@
 
 .SubCardWrapper {
 
+  /* 大きさ設定 */
+  width: 100%;
+  height: 100%;
+
   /* 要素配置設定 */
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
 }
 
@@ -110,8 +116,12 @@
 
 .card {
 
-    /* アニメーション設定 */
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  /* 大きさ設定 */
+  width: 100%;
+  height: 100%;
+
+  /* アニメーション設定 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
 }
 

@@ -21,7 +21,12 @@ export interface ParsedMarkdown {
 //         parseMarkdown(マークダウンファイルの内容)
 // ==========================================================
 export const parseMarkdown = (raw: string): ParsedMarkdown => {
-    console.log("マークダウンの中身: ", raw);
+    // Startup Log(Function)
+    const logOwner = "parseMarkdown";
+    console.log(`\n${logOwner}-Function is running!\n`);
+
+    // Input Log
+    console.log(`[${logOwner}] Input => ${raw}`);
 
     // =============================================
     // "===" でページとして区切る(MainCardを配列化)
@@ -79,7 +84,7 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
         // titleProps: {key: string, value: string}にはタイトルの引数
         // pageContent: stringにはタイトルを省いた部分全部
         pageContent = pageContentArray.join('\n');
-        console.log("タイトル以外の内容: ", pageContent);
+        console.log("タイトル以外の内容: \n", pageContent);
 
         // =============================
         //         meta情報を分解
@@ -158,5 +163,8 @@ export const parseMarkdown = (raw: string): ParsedMarkdown => {
             }
         });
     });
+
+    // Output Log
+    console.log(`[${logOwner}] Output => meta: ${JSON.stringify({ meta, contents: mainParsedContents }, null, 2)}`);
     return { meta, contents: mainParsedContents };
 };

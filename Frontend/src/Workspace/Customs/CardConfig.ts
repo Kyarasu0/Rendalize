@@ -1,13 +1,13 @@
 import { NormalCard } from "../Components/Cards/NormalCard/NormalCard";
-import { ListCard } from "../Components/Cards/ListCard/ListCard";
-import { MediaCard } from "../Components/Cards/MediaCard/MediaCard";
-import { TimelineCard } from "../Components/Cards/TimelineCard/TimelineCard";
-import { LineGraphCard } from "../Components/Cards/LineGraphCard/LineGraphCard";
-import { StackCard } from "../Components/Cards/StackCard/StackCard";
-import { StepCircleCard } from "../Components/Cards/StepCircleCard/StepCircleCard";
-import { FlipCard } from "../Components/Cards/FlipCard/FlipCard";
-import { TitleCard } from "../Components/Cards/TitleCard/TitleCard";
-import { ProjectsListCard } from "../Components/Cards/ProjectsListCard/ProjectsListCard";
+// import { ListCard } from "../Components/Cards/ListCard/ListCard";
+// import { MediaCard } from "../Components/Cards/MediaCard/MediaCard";
+// import { TimelineCard } from "../Components/Cards/TimelineCard/TimelineCard";
+// import { LineGraphCard } from "../Components/Cards/LineGraphCard/LineGraphCard";
+// import { StackCard } from "../Components/Cards/StackCard/StackCard";
+// import { StepCircleCard } from "../Components/Cards/StepCircleCard/StepCircleCard";
+// import { FlipCard } from "../Components/Cards/FlipCard/FlipCard";
+// import { TitleCard } from "../Components/Cards/TitleCard/TitleCard";
+// import { ProjectsListCard } from "../Components/Cards/ProjectsListCard/ProjectsListCard";
 
 export const CardConfig = {
   NormalCard: {

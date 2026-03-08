@@ -4,7 +4,7 @@ cursor: TapRipple Laser
 font: JKGothic
 setting: ForWhiteSetting
 ===
-\NormalCard width=70%
+\NormalCard width=70% bg_color=#999999
 
 #+ NormalTitle align=left font_color=black
 
@@ -14,7 +14,8 @@ setting: ForWhiteSetting
 
 ---
 \NormalCard width=30% bg_color=#888888
-
+# ABCリスト
+これはアルファベット順の上から3つを取り上げています
 - A
 - B
 - C

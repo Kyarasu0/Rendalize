@@ -19,6 +19,7 @@ import { TitleConfig } from "../../Customs/TitleConfig";
 import { SettingConfig } from "../../Customs/SettingConfig";
 import { PipelineConfig } from "../../Customs/PipelineConfig";
 import { ElementConfig } from "../../Customs/ElementConfig";
+import { CardConfig } from "../../Customs/CardConfig";
 
 interface Props {
   url: string;
@@ -250,31 +251,19 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
               card.props?.width ??
               (subCount > 0 ? `${100 / subCount}%` : "100%");
 
+            // CardConfig からコンポーネントを取得
+            const CardComponent =
+              CardConfig[card.type as keyof typeof CardConfig]?.component ??
+              CardConfig.NormalCard.component;
+
             return (
-              <div
+              <CardComponent
                 key={i}
-                className={styles.SubCardWrapper}
-
-                /* widthを基準にするが必要なら縮む */
-                style={{ flex: `0 1 ${width}` }}
-              >
-                {elements.map((element, eIdx) => {
-                  // ElementConfig からコンポーネントを取得
-                  const config =
-                    ElementConfig[element.type as keyof typeof ElementConfig];
-                  const Component = config?.component;
-
-                  if (!Component) return null;
-
-                  return (
-                    <Component
-                      key={eIdx}
-                      {...element}
-                      color={setting.color}
-                    />
-                  );
-                })}
-              </div>
+                elements={elements}
+                {...card.props}
+                color={setting.color}
+                style={{ flex: `1 1 ${width}` }}
+              />
             );
 
           })}
@@ -364,7 +353,11 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
       ) : (
 
-        contents.map((page) => renderPage(page))
+        contents.map((page, i) => (
+          <div key={i}>
+            {renderPage(page)}
+          </div>
+        ))
 
       )}
 

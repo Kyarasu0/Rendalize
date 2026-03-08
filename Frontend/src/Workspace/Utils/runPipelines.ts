@@ -41,6 +41,13 @@ export const runPipelines = (
   pipelinePairs: PipelinePair[]
 ): ElementNode[] => {
 
+  // Startup Log(Function)
+  const logOwner = "runPipelines";
+  console.log(`\n${logOwner}-Function is running!\n`);
+
+  // Input Log
+  console.log(`[${logOwner}] Input => content: ${content}, pipelinePair: ${JSON.stringify(pipelinePairs, null, 2)}`);
+
   let nodes: ElementNode[] = [
     { type: "text", content }
   ]
@@ -65,5 +72,7 @@ export const runPipelines = (
 
   }
 
+  // Output Log
+  console.log(`[${logOwner}] Output => nodes: ${JSON.stringify(nodes, null, 2)}`);
   return nodes
 }
