@@ -18,7 +18,6 @@ import { CursorConfig } from "../../Customs/CursorConfig";
 import { TitleConfig } from "../../Customs/TitleConfig";
 import { SettingConfig } from "../../Customs/SettingConfig";
 import { PipelineConfig } from "../../Customs/PipelineConfig";
-import { ElementConfig } from "../../Customs/ElementConfig";
 import { CardConfig } from "../../Customs/CardConfig";
 
 interface Props {
@@ -262,7 +261,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
                 elements={elements}
                 {...card.props}
                 color={setting.color}
-                style={{ flex: `1 1 ${width}` }}
+                style={{ flex: `0 1 ${width}`, gap: "20px" }}
               />
             );
 

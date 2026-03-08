@@ -4,14 +4,15 @@ transition: Fade
 cursor: TapRipple Laser Marker
 font: JKGothic
 ===
->NoteMarkerTitle contents="自己紹介" align=left bg_color=none font_color=#333333
-\MediaCard align=left bg_color=#eef2f8 font_color=#333333 width=43% media=public/Data/Images/Kyarasu_Root.jpg
+#+ NoteMarkerTitle contents="自己紹介" align=left bg_color=none font_color=#333333
+\NormalCard align=left bg_color=white font_color=#333333 width=43%
 
+![public/Data/Images/Kyarasu_Root.jpg]
 # Name: 川野光喜
 # Nickname: Kyarasu
 
 ---
-\StackCard align=left bg_color=none font_color=#333333 width=57%
+::Stack align=left bg_color=none font_color=#333333 width=57%
 # 大学: 立命館大学 28卒
 ### 情報理工学部 情報理工学科 (セキュリティネットワークコース)
 :::
@@ -23,6 +24,7 @@ font: JKGothic
 :::
 # 興味ある分野:
 ### 最近はブロックチェーン
+::
 
 ===
 

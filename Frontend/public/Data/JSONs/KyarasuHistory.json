@@ -1,0 +1,18 @@
+[
+  { "year": "2024/4", "label": "立命館大学 入学", "color": "#999999" },
+  { "year": "2024/5", "label": "RiST 入団", "color": "#999999" },
+  { "year": "2024/9", "label": "Monkey Hack Party 参加", "color": "#61baff" },
+  { "year": "2024/12", "label": "ISUCON 14 参加", "color": "#fd7979" },
+  { "year": "2025/2", "label": "KC3ハッカソン 2025 参加", "color": "#61baff" },
+  { "year": "2025/3", "label": "Monkey Conference Party 登壇", "color": "#79fd8d" },
+  { "year": "2025/5", "label": "RiS Treasure Hunt 運営", "color": "#79fd8d" },
+  { "year": "2025/5", "label": "TsukuCTF 参加", "color": "#fd7979" },
+  { "year": "2025/8", "label": "RsHack 勉強会 登壇", "color": "#79fd8d" },
+  { "year": "2025/8", "label": "ICTSC 参加", "color": "#fd7979" },
+  { "year": "2025/9", "label": "UAI XR ハッカソン 参加", "color": "#61baff" },
+  { "year": "2025/9", "label": "58ハッカソン 参加", "color": "#61baff" },
+  { "year": "2025/10", "label": "ウメキタ Tech Base 参加", "color": "#61baff" },
+  { "year": "2025/10", "label": "JPHack 参加", "color": "#61baff" },
+  { "year": "2025/12", "label": "Nemtus ハッカソン 2026 参加", "color": "#61baff" },
+  { "year": "2026/2", "label": "KC3ハッカソン 2026 参加", "color": "#61baff" }
+]

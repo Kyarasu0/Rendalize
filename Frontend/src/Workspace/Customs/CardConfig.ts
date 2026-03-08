@@ -1,18 +1,26 @@
 import { NormalCard } from "../Components/Cards/NormalCard/NormalCard";
+import { ProjectsListCard } from "../Components/Cards/ProjectsListCard/ProjectsListCard";
+import { TimelineCard } from "../Components/Cards/TimelineCard/TimelineCard";
 // import { ListCard } from "../Components/Cards/ListCard/ListCard";
 // import { MediaCard } from "../Components/Cards/MediaCard/MediaCard";
-// import { TimelineCard } from "../Components/Cards/TimelineCard/TimelineCard";
 // import { LineGraphCard } from "../Components/Cards/LineGraphCard/LineGraphCard";
 // import { StackCard } from "../Components/Cards/StackCard/StackCard";
 // import { StepCircleCard } from "../Components/Cards/StepCircleCard/StepCircleCard";
 // import { FlipCard } from "../Components/Cards/FlipCard/FlipCard";
 // import { TitleCard } from "../Components/Cards/TitleCard/TitleCard";
-// import { ProjectsListCard } from "../Components/Cards/ProjectsListCard/ProjectsListCard";
 
 export const CardConfig = {
   NormalCard: {
     component: NormalCard,
     label: "Normal",
+  },
+  ProjectsListCard: { 
+    component: ProjectsListCard,
+    label: "ProjectsList"
+  },
+  TimelineCard: { 
+    component: TimelineCard,
+    label: "Timeline"
   },
   // ListCard: { 
   //   component: ListCard,
@@ -21,10 +29,6 @@ export const CardConfig = {
   // MediaCard: { 
   //   component: MediaCard,
   //   label: "Media"
-  // },
-  // TimelineCard: { 
-  //   component: TimelineCard,
-  //   label: "Timeline"
   // },
   // LineGraphCard: { 
   //   component: LineGraphCard,
@@ -45,10 +49,6 @@ export const CardConfig = {
   // TitleCard: { 
   //   component: TitleCard,
   //   label: "Title"
-  // },
-  // ProjectsListCard: { 
-  //   component: ProjectsListCard,
-  //   label: "ProjectsList"
   // },
 } as const;
 

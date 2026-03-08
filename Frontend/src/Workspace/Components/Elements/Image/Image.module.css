@@ -1,12 +1,9 @@
-.wrapper{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.image{
+  object-fit:contain; /* 画像の比率を保ったまま枠内に収める */
+  border-radius:8px;
+  transition: transform 0.3s ease;
 }
 
-.image{
-  max-width:100%;
-  height:auto;
-  border-radius:8px;
+.image:hover {
+  transform: scale(1.05);
 }

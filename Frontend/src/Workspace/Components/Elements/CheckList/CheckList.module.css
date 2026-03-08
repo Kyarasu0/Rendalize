@@ -12,6 +12,11 @@
   align-items: flex-start;
   gap: 8px;
   margin: 6px 0;
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: translateX(10px);
 }
 
 .icon {

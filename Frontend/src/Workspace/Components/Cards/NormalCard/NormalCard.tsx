@@ -29,8 +29,6 @@ export const NormalCard = ({
     style,
 }: Props) => {
 
-    console.log("bg_color announce!: ", bg_color);
-
     const resolveColor = (value: string) => {
         if (value in color) return color[value];
         return value;
@@ -43,6 +41,8 @@ export const NormalCard = ({
                 : resolveColor(bg_color),
 
         color: resolveColor(font_color),
+
+        alignItems: align,
 
         textAlign: align,
 

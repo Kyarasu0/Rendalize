@@ -9,22 +9,27 @@ export const Image = ({
   props,
   color
 }: Props) => {
+  console.log("IMAGE", props?.src);
 
   const src = props?.src;
   if (!src) return null;
 
   const style: React.CSSProperties = {
-    boxShadow: `0 10px 30px ${color?.shadow}`,
     borderColor: color?.grid ?? "transparent",
+    width: props?.width ?? "100%",
   };
 
   return (
-    <div className={styles.wrapper} style={style}>
+    <>
       <img
         src={src}
         className={styles.image}
-        alt=""
+        style={style}
+        alt="Not found image..."
+        onError={() => {
+          console.error("Image load failed:", src);
+        }}
       />
-    </div>
+    </>
   );
 };

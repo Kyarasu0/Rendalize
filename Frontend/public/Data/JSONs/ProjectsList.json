@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "VCESS",
+    "summary": "ヴィジュネル暗号を用いたパスワード管理アプリ",
+    "color": "bg-sky-500",
+    "members": ["Kyarasu", "Maomao"],
+    "memberCount": 2,
+    "startDate": "2024-10",
+    "role": "Frontend(React Native) / Encryption Logic",
+    "icon": "public/Data/Images/Projects/VCESS_Croped.png"
+  },
+  {
+    "id": 2,
+    "name": "Idisclosure#1",
+    "summary": "戦略的ハッキングゲーム",
+    "color": "bg-lime-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Misoni", "Minto"],
+    "memberCount": 5,
+    "startDate": "2025-02",
+    "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
+    "icon": "public/Data/Images/Projects/IdisclosureLogo.png"
+  },
+  {
+    "id": 3,
+    "name": "Sonic Flavor",
+    "summary": "VR空間における音響視覚化アプリ",
+    "color": "bg-sky-500",
+    "members": ["Kyarasu", "ユーキ", "ユウキ", "山根", "柏木"],
+    "memberCount": 5,
+    "startDate": "2025-09",
+    "role": "Blender",
+    "icon": "public/Data/Images/Projects/SonicFlavor.png"
+  },
+  {
+    "id": 4,
+    "name": "Idisclosure#2",
+    "summary": "Idisclosure#1 拡張版",
+    "color": "bg-red-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Misoni"],
+    "memberCount": 4,
+    "startDate": "2025-10",
+    "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
+    "icon": "public/Data/Images/Projects/Idisclosure2Logo.png"
+  },
+  {
+    "id": 5,
+    "name": "Memory Steg-Hideout",
+    "summary": "ステガノグラフィーを用いた写真管理/共有Webアプリ",
+    "color": "bg-sky-500",
+    "members": ["Kyarasu", "Maomao", "Yukke"],
+    "memberCount": 3,
+    "startDate": "2025-10",
+    "role": "Blender / Frontend(HTML, CSS, JS) / Backend(Express.js) / C++ / Docker",
+    "icon": "public/Data/Images/Projects/MemorySteg-Hideout.png"
+  },
+  {
+    "id": 6,
+    "name": "ARROW",
+    "summary": "イベント告知 & 出席管理アプリ",
+    "color": "bg-amber-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Misoni", "Minto", "Nayu", "COG", "Yukke"],
+    "memberCount": 8,
+    "startDate": "2025-10",
+    "role": "Blender / Backend(Express.js) / DB Design / Docker",
+    "icon": "public/Data/Images/Projects/ARROW.jpg"
+  },
+  {
+    "id": 7,
+    "name": "TrusToken",
+    "summary": "信頼を仮想通貨として相互送信するWebアプリ",
+    "color": "bg-sky-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Silver", "Nayu"],
+    "memberCount": 5,
+    "startDate": "2026-02",
+    "role": "Backend(Express.js) / BlockChain(Symbol) / Docker",
+    "icon": "public/Data/Images/Projects/TrusToken.png"
+  },
+  {
+    "id": 8,
+    "name": "Idisclosure#3",
+    "summary": "PhotonによるP2P通信を使い、フロントエンドのみで構成したWebゲーム版",
+    "color": "bg-amber-500",
+    "members": ["Kyarasu"],
+    "memberCount": 1,
+    "startDate": "2026-02",
+    "role": "Frontend(React) / Frontend(Photon) / Frontend(HyakkiYako?)",
+    "icon": "public/Data/Images/Projects/IdisclosureSharp3_Logo.png"
+  }
+]

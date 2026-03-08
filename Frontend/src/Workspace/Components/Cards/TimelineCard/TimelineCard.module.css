@@ -1,74 +1,90 @@
 .card {
   width: 100%;
-  position: relative;
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE10+ */
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin: 20px;
   padding: 32px;
   border-radius: 16px;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: center;
 
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.2);
-
-  transition: all 0.3s ease;
-
-  scroll-padding-top: 32px; /* スクロール時の余白 */
 }
 
 .card::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .timelineLine {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: row;
   gap: 32px;
-
-  /* paddingは不要 */
+  position: relative;
 }
 
-.timelineLine::before {
+/* .timelineLine::before {
   content: "";
   position: absolute;
-  left: 20px; /* 中央線位置 */
   top: 0;
   bottom: 0;
+  left: 20px;
   width: 2px;
-  background-color: rgba(0, 0, 0, 0.05);
-}
+  background-color: rgba(0,0,0,0.05);
+  z-index: 0;
+} */
 
 .eventWrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 60px; /* 丸・年のスペース */
   position: relative;
-  padding-left: 60px; /* 年・丸用スペース確保 */
-  min-height: 24px; /* 丸が重ならないように高さを確保 */
+}
+
+.eventWrapperEnd {
+  display: flex;
+  flex-direction: column;
+  padding-left: 60px; /* 丸・年のスペース */
+  position: relative;
 }
 
 .circle {
-  position: absolute;
-  left: 12px; /* 中央線に合わせる */
-  top: 0;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #3b82f6; /* 青丸 */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+  position: absolute;
+  left: 12px;
+  top: 0;
   transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .eventWrapper:hover .circle {
   transform: scale(1.2);
 }
 
+.eventWrapper::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  height: 100px;
+  background-color: rgba(0,0,0,0.05);
+}
+
 .year {
-  display: block;
   font-size: 0.75rem;
   font-family: monospace;
   text-transform: uppercase;

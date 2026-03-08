@@ -16,6 +16,14 @@ List Pipeline
 
 export const listPipeline: Pipeline = (nodes) => {
 
+  // Startup Log(Function)
+  const logOwner = "listPipeline";
+  console.log(`\n${logOwner}-Function is running!\n`);
+
+  // Input Log
+  console.log(`[${logOwner}] Input => ${JSON.stringify(nodes, null, 2)}`);
+
+
   const result: ElementNode[] = [];
 
   for (const node of nodes) {
@@ -68,6 +76,9 @@ export const listPipeline: Pipeline = (nodes) => {
       });
     }
   }
+
+  // Output Log
+  console.log(`[${logOwner}] Output => ${JSON.stringify(result, null, 2)}`);
 
   return result;
 };

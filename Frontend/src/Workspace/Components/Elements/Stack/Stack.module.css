@@ -1,0 +1,58 @@
+.card{
+  width:100%;
+  box-sizing:border-box;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  border-radius:16px;
+
+  transition:
+    transform 0.4s cubic-bezier(0.2,0,0,1),
+    box-shadow 0.4s ease;
+}
+
+.glass{
+  backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid #555;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+}
+
+.none{
+  backdrop-filter:none;
+  border:none;
+  box-shadow:none;
+}
+
+/* stack wrapper */
+.stack{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* mini card */
+.miniCard{
+  /* 要素配置設定 */
+  display: flex;          /* ← 必須 */
+  flex-direction: column; /* 縦方向に並べる */
+
+  /* 余白設定 */
+  gap: 20px;
+
+  padding:20px;
+  border-radius:12px;
+
+  border:1px solid #AAA;
+  background:rgba(255,255,255,0.08);
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.miniCard:hover{
+  background:rgba(255,255,255,0.15);
+  transform:translateY(-6px);
+}

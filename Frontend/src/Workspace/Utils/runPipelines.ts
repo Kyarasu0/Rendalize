@@ -60,13 +60,12 @@ export const runPipelines = (
     // その1つのパイプラインによって編集された部分に対して描画タイプをくっつける
     nodes = result.map(node => {
 
-      if (node.type !== "text") {
+      if (node.type === pair.pipeline.name.replace("Pipeline", "")) {
         return {
           ...node,
           type: pair.render
         }
       }
-
       return node
     })
 
