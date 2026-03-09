@@ -1,6 +1,7 @@
 import styles from "./Stack.module.css";
 import ReactMarkdown from "react-markdown";
 import type { ElementNode } from "../../../Utils/runPipelines";
+import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
 
 /*
 ==================================================
@@ -10,28 +11,27 @@ stackPipeline が生成した node を描画する
 ==================================================
 */
 
-interface Props extends ElementNode {
-  color?: Record<string, string>
-}
+interface Props extends ElementNode {}
 
 export const Stack = ({
   content,
   props
 }: Props) => {
 
-  // propsからスタイル設定を取得
-  const align = props?.align ?? "left";
-  const bg_color = props?.bg_color ?? "rgba(255,255,255,0.12)";
-  const font_color = props?.font_color ?? "white";
+  // color
+  const color = props?.color ?? COLORS;
 
   const style: React.CSSProperties = {
-    backgroundColor: bg_color === "none" ? "transparent" : bg_color,
-    color: font_color,
-    textAlign: align,
-    backdropFilter: bg_color === "none" ? undefined : "blur(20px)",
-    boxShadow: bg_color === "none" ? undefined : "0 8px 32px rgba(0,0,0,0.2)",
-    border: bg_color === "none" ? undefined : "1px solid rgba(255,255,255,0.2)"
+    alignItems: props?.align ?? "left",
+    textAlign: props?.align ?? "left",
+    backgroundColor: props?.bg_color ?? color.default_element_bg,
+    color: props?.font_color ?? color.default_font,
   };
+
+  const miniCardStyle: React.CSSProperties = {
+    border: `1px solid ${color.grid}`,
+    backgroundColor: props?.bg_color ?? color.default_element_bg
+  }
 
   // ::: 区切りでミニカードを作る
   // content が文字列であることを確認して扱う
@@ -43,12 +43,12 @@ export const Stack = ({
 
   return (
     <div
-      className={`${styles.card} ${bg_color === "none" ? styles.none : styles.glass}`}
+      className={`${styles.card} ${styles.glass}`}
       style={style}
     >
       <div className={styles.stack}>
         {items.map((text: string, i: number) => (
-          <div key={i} className={styles.miniCard}>
+          <div key={i} className={styles.miniCard} style={miniCardStyle}>
             <ReactMarkdown>{text}</ReactMarkdown>
           </div>
         ))}

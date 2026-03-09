@@ -1,0 +1,26 @@
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.iconWrapper:hover {
+  transform: scale(1.1);
+}
+
+.icon {
+  transition: transform 0.3s ease;
+}
+
+.iconWrapper .icon {
+  position: absolute; /* 丸の中心に固定 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 中心に置く */
+  transition: none; /* 拡大させない */
+}

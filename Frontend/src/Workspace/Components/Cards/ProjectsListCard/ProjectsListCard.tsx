@@ -1,5 +1,6 @@
 import styles from "./ProjectsListCard.module.css";
 import React, { useEffect, useState } from "react";
+import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
 
 interface Project {
   id: number | string;
@@ -18,6 +19,7 @@ interface Props {
   align?: "left" | "center" | "right";
   bg_color?: string;
   font_color?: string;
+  color?: Record<string, string>
   style?: React.CSSProperties;
 }
 
@@ -27,8 +29,14 @@ export const ProjectsListCard = ({
   align = "left",
   bg_color = "white",
   font_color = "black",
+  color = COLORS,
   style,
 }: Props) => {
+
+  const resolveColor = (value: string) => {
+    if (value in color) return color[value];
+    return value;
+  };
 
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -48,12 +56,33 @@ export const ProjectsListCard = ({
 
   // card 全体スタイル
   const cardStyle: React.CSSProperties = {
-    backgroundColor: bg_color === "none" ? "transparent" : bg_color,
-    color: font_color,
+    // align
+    alignItems: align,
     textAlign: align,
+
+    // bg_color
+    backgroundColor: bg_color ? 
+        bg_color === "none"
+            ? "transparent"
+            : resolveColor(bg_color)
+        : color.default_card_bg,
+
+
+    // font_color
+    color: font_color ? resolveColor(font_color) : color.default_font,
+
+    // 装飾
     backdropFilter: bg_color === "none" ? undefined : "blur(20px)",
-    boxShadow: bg_color === "none" ? undefined : "0 8px 32px rgba(0,0,0,0.2)",
-    border: bg_color === "none" ? undefined : "1px solid rgba(255,255,255,0.2)",
+
+    boxShadow:
+        bg_color === "none"
+            ? undefined
+            : `0 6px 18px ${color.shadow}`,
+
+    // border:
+    //     bg_color === "none"
+    //         ? undefined
+    //         : `1px solid ${color.grid}`,
     ...style,
   };
   

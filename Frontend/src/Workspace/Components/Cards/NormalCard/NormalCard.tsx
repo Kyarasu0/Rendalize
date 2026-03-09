@@ -2,6 +2,7 @@ import styles from "./NormalCard.module.css";
 import type { ElementNode } from "../../../Utils/runPipelines";
 import { ElementConfig } from "../../../Customs/ElementConfig";
 import ReactMarkdown from "react-markdown";
+import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
 
 interface Props {
   elements: ElementNode[];
@@ -17,15 +18,7 @@ export const NormalCard = ({
     align = "left",
     bg_color = "white",
     font_color = "black",
-    color =  {
-        blue: '#61baff',
-        red: '#fd7979',
-        green: '#79fd8d',
-        white: '#eef2f8',
-        black: '#333',
-        shadow: 'rgba(0,0,0,0.2)',
-        grid: 'rgba(255,255,255,0.2)'
-    },
+    color = COLORS,
     style,
 }: Props) => {
 
@@ -35,17 +28,22 @@ export const NormalCard = ({
     };
 
     const inputStyleWithDefaults: React.CSSProperties = {
-        backgroundColor:
-            bg_color === "none"
-                ? "transparent"
-                : resolveColor(bg_color),
-
-        color: resolveColor(font_color),
-
+        // align
         alignItems: align,
-
         textAlign: align,
 
+        // bg_color
+        backgroundColor: bg_color ? 
+            bg_color === "none"
+                ? "transparent"
+                : resolveColor(bg_color)
+            : color.default_card_bg,
+
+
+        // font_color
+        color: font_color ? resolveColor(font_color) : color.default_font,
+
+        // 装飾
         backdropFilter: bg_color === "none" ? undefined : "blur(20px)",
 
         boxShadow:
@@ -53,10 +51,10 @@ export const NormalCard = ({
                 ? undefined
                 : `0 6px 18px ${color.shadow}`,
 
-        border:
-            bg_color === "none"
-                ? undefined
-                : `1px solid ${color.grid}`,
+        // border:
+        //     bg_color === "none"
+        //         ? undefined
+        //         : `1px solid ${color.grid}`,
         ...style,
     };
 

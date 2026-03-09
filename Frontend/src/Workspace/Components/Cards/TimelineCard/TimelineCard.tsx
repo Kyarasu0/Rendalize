@@ -1,5 +1,6 @@
 import styles from "./TimelineCard.module.css";
 import { useEffect, useState } from "react";
+import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
 
 interface TimelineEvent {
   year: string;
@@ -12,14 +13,24 @@ interface Props {
   bg_color?: string;
   font_color?: string;
   rows?: number; // 縦の行数
+  color?: Record<string, string>
+  style?: React.CSSProperties;
 }
 
 export const TimelineCard = ({
-  json,
-  bg_color = "rgba(255,255,255,0.03)",
-  font_color = "white",
+  json = "",
   rows = 5,
+  bg_color = "white",
+  font_color = "black",
+  color = COLORS,
+  style,
 }: Props) => {
+
+  const resolveColor = (value: string) => {
+    if (value in color) return color[value];
+    return value;
+  };
+
   const [events, setEvents] = useState<TimelineEvent[]>([]);
 
   // JSON 読み込み
@@ -36,8 +47,36 @@ export const TimelineCard = ({
     loadJson();
   }, [json]);
 
+  // card 全体スタイル
+    const cardStyle: React.CSSProperties = {
+      // bg_color
+      backgroundColor: bg_color ? 
+          bg_color === "none"
+              ? "transparent"
+              : resolveColor(bg_color)
+          : color.default_card_bg,
+  
+  
+      // font_color
+      color: font_color ? resolveColor(font_color) : color.default_font,
+  
+      // 装飾
+      backdropFilter: bg_color === "none" ? undefined : "blur(20px)",
+  
+      boxShadow:
+          bg_color === "none"
+              ? undefined
+              : `0 6px 18px ${color.shadow}`,
+  
+      // border:
+      //     bg_color === "none"
+      //         ? undefined
+      //         : `1px solid ${color.grid}`,
+      ...style,
+    };
+
   return (
-    <div className={styles.card} style={{ backgroundColor: bg_color }}>
+    <div className={styles.card} style={{...cardStyle}}>
       <div className={styles.timelineLine}
         style={{
           display: "grid",

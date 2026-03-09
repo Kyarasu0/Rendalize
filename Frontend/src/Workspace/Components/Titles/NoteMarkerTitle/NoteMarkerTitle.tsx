@@ -1,4 +1,5 @@
 import styles from "./NoteMarkerTitle.module.css";
+import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
 
 interface Props {
   content: string;
@@ -6,26 +7,51 @@ interface Props {
   font_color?: string;
   font_size?: string;
   bg_color?: string;
+  color?: Record<string, string>;
 }
 
 export const NoteMarkerTitle = ({
-  content,
-  align = "left",
-  font_color = "#fff",
-  font_size,
-  bg_color = "transparent",
+    content,
+    align = "left",
+    bg_color = "transparent",
+    font_color = "black",
+    font_size,
+    color = COLORS,
 }: Props) => {
-  const justify =
-    align === "center" ? "center" : align === "right" ? "flex-end" : "flex-start";
+
+    const resolveColor = (value: string) => {
+        if (value in color) return color[value];
+        return value;
+    };
 
     const style: React.CSSProperties = {
-        backgroundColor: bg_color === "none" ? "transparent" : bg_color,
-        color: font_color,
+        // align
+        justifyContent: align,
         textAlign: align,
-        justifyContent: justify,
+
+        // bg_color
+        backgroundColor: bg_color ? 
+            bg_color === "none"
+                ? "transparent"
+                : resolveColor(bg_color)
+            : color.default_card_bg,
+
+
+        // font_color
+        color: font_color ? resolveColor(font_color) : color.default_font,
+
+        // 装飾
         backdropFilter: bg_color === "none" ? undefined : "blur(20px)",
-        boxShadow: bg_color === "none" ? undefined : "0 6px 18px rgba(0,0,0,0.15)",
-        border: bg_color === "none" ? undefined : "1px solid rgba(255,255,255,0.2)",
+
+        boxShadow:
+            bg_color === "none"
+                ? undefined
+                : `0 6px 18px ${color.shadow}`,
+
+        // border:
+        //     bg_color === "none"
+        //         ? undefined
+        //         : `1px solid ${color.grid}`,
     };
 
     return (

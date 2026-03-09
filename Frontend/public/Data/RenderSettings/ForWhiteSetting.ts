@@ -38,6 +38,10 @@ export const ForWhiteSetting = {
     {
       pipeline: "stackPipeline",
       render: "Stack"
+    },
+    {
+      pipeline: "iconPipeline",
+      render: "ColorIcon"
     }
   ]
 };
