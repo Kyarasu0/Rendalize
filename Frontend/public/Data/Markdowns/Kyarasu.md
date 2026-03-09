@@ -5,18 +5,18 @@ font: JKGothic
 setting: ForWhiteSetting
 ===
 
-\NormalCard width=43% bg_color=white align=center
-#+ 自己紹介 align=left font_color=black bg_color=none
+\NormalCard width=43% align=center
+#+ 自己紹介 bg_color=none
 ![public/Data/Images/Kyarasu_Root.jpg width=90%]
-::Stack align=left bg_color=none font_color=#333333
+::Stack
 ## Name: 川野光喜
 ## Nickname: Kyarasu
 ::
 
 ---
 
-\NormalCard  width=57% bg_color=white
-::Stack align=left bg_color=none font_color=#333333
+\NormalCard  width=57%
+::Stack
 ### 大学: 立命館大学 28卒
  情報理工学部 情報理工学科 (セキュリティネットワークコース)
 :::
@@ -32,9 +32,9 @@ Ritsumeikan Security Team
 
 ===
 
-\NormalCard width=100% bg_color=white align=center
-#+ プログラミングを始めたきっかけ align=left font_color=black bg_color=none
-::Stack align=left bg_color=none font_color=#333333
+\NormalCard width=100%
+#+ プログラミングを始めたきっかけ bg_color=none
+::Stack
 ## 性格:
 ## とにかくなんでもできるようになりたい
 :::
@@ -47,50 +47,45 @@ Ritsumeikan Security Team
 
 ===
 
-#+ これまでの経験(制作物) align=left bg_color=none font_color=#333333
+#+ これまでの経験(制作物) bg_color=none
 \ProjectsListCard json=ProjectsList.json columns=3
 
 ===
 
-#+ これまでの経験(代表作) align=left bg_color=none font_color=#333333
+#+ これまでの経験(代表作) bg_color=none
 \ProjectsListCard json=ProjectsMajor.json columns=1 width=40%
 
 ---
 
-\NormalCard  width=60% bg_color=white
+\NormalCard  width=60%
 # 1. プロダクト名: Idisclosure
 概要: ゲーム内で通信している他のプレイヤーに対して、サイバー攻撃やその防御を繰り返し、相手が持つ秘密のIDを抜き取ったら勝ち
-\n
-\n
 # 2. なぜ作ったのか？
 - セキュリティの勉強の難しさ
 - 法律的な制限
 
 ===
 
-#+ これまでの経験(参加歴等) align=left bg_color=none font_color=#333333
+#+ これまでの経験(参加歴等) bg_color=none
 \TimelineCard json=KyarasuHistory.json width=60% font_color=#333333 rows=6
 
 ---
 
-\NormalCard  width=40% bg_color=white
-?[Code bg_color=#61baff]
-**ハッカソン**
+\NormalCard  width=40%
+?[Code bg_color=#61baff content=**ハッカソン**]
 チーム開発スキルやプロダクト開発スキルを身につけたい
-?[Settings bg_color=#fd7979]
-**技術系コンテスト**
+?[Settings bg_color=#fd7979 content=**技術系コンテスト**]
 開発だけじゃなくてその他の実践的なスキルも身につけたい
-?[Handshake bg_color=#79fd8d]
-**イベント運営系**
+?[Handshake bg_color=#79fd8d content=**イベント運営系**]
 コミュニケーションスキルやマネジメントスキルも身につけたい
 
 ===
 
-#+ 目指すエンジニア像 align=left bg_color=none font_color=#333333
-\NormalCard  width=100% bg_color=white
-# 「幅広い"技術"や"ロジック"を使いこなし、チームでの課題解決やプロダクト改善に貢献できるエンジニア」
+#+ 目指すエンジニア像 bg_color=none
+\NormalCard  width=100%
+## 「幅広い"技術"や"ロジック"を使いこなし、チームでの課題解決やプロダクト改善に貢献できるエンジニア」
 
-::Stack align=left bg_color=none font_color=#333333
+::Stack
 ## 技術面ではフロントエンドやバックエンド、インフラやUnityなどいろいろ触ったことが経験があり、その経験を活かしたい。
 :::
 ## ロジック面では、超簡易的ではあるがAIの自作やブロックチェーンの自作などを行った経験があり、そのような仕組みについて調べたり考えたりするのが好き。
@@ -98,11 +93,11 @@ Ritsumeikan Security Team
 
 ===
 
-#+ 希望するポジション align=left bg_color=none font_color=#333333
-\NormalCard  width=100% bg_color=white
-# プロダクト開発エンジニア
+#+ 希望するポジション bg_color=none
+\NormalCard  width=100%
+## プロダクト開発エンジニア
 
-::Stack align=left bg_color=none font_color=#333333
+::Stack
 ## 表面的な実装だけでなく、仕組み(ロジック)を理解した開発ができる様なポジションになりたい。
 :::
 ## 将来的には、技術領域全体を理解した上で判断ができる立場として、チームやプロダクトに貢献するだけでなく引っ張って行けるエンジニアになることを目指しています。

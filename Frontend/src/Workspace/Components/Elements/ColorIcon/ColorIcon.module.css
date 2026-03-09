@@ -1,3 +1,9 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* アイコンとテキストの間隔 */
+}
+
 .iconWrapper {
   position: relative;
   display: flex;
@@ -5,6 +11,7 @@
   justify-content: center;
   border-radius: 50%;
   transition: transform 0.3s ease;
+  aspect-ratio: 1 / 1;
   cursor: pointer;
   overflow: hidden;
 }

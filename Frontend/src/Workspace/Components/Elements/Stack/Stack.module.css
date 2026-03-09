@@ -6,7 +6,7 @@
   flex-direction:column;
   justify-content:center;
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: none;
 
   border-radius:16px;
 
@@ -15,9 +15,9 @@
     box-shadow 0.4s ease;
 }
 
-.glass{
+/* .glass{
   backdrop-filter:blur(20px) saturate(180%);
-}
+} */
 
 .none{
   backdrop-filter:none;
@@ -27,7 +27,6 @@
 
 /* stack wrapper */
 .stack{
-  background-color: transparent;
   display:flex;
   flex-direction:column;
   gap:20px;
@@ -46,7 +45,6 @@
   border-radius:12px;
 
   transition:
-    background 0.3s ease,
     transform 0.3s ease;
 }
 

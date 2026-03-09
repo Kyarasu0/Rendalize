@@ -21,7 +21,7 @@ export const ForWhiteSetting = {
     margin: 0,
   },
   body: {
-    fontSize: "18px",
+    fontSize: "25px",
   },
   p: {
     margin: 0,
