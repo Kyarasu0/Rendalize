@@ -92,5 +92,5 @@ Webには**Hover**や**Cursor**という武器がある(canvaやpptxではでき
 
 \NormalCard width=60% align=center
 ## Rendalizeの構成はざっくりこんな感じ
-![public/Data/Images/RendalizeStructure.png]
+![/Rendalize/Data/Images/RendalizeStructure.png]
 
