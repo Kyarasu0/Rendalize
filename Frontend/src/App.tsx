@@ -12,7 +12,7 @@ function App() {
   return (
     // MarkdownEngineに渡す
     <MarkdownEngine
-      url={`Data/Markdowns/${file}`}
+      url={`${import.meta.env.BASE_URL}Data/Markdowns/${file}`}
       mode={mode}
     />
   );
