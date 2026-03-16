@@ -1,0 +1,35 @@
+[
+  {
+    "id": 2,
+    "name": "Idisclosure#1",
+    "summary": "戦略的ハッキングゲーム",
+    "color": "bg-lime-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Misoni", "Minto"],
+    "memberCount": 5,
+    "startDate": "2025-02",
+    "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
+    "icon": "public/Data/Images/Projects/IdisclosureLogo.png"
+  },
+  {
+    "id": 4,
+    "name": "Idisclosure#2",
+    "summary": "Idisclosure#1 拡張版",
+    "color": "bg-red-500",
+    "members": ["Kyarasu", "Maomao", "Toaru", "Misoni"],
+    "memberCount": 4,
+    "startDate": "2025-10",
+    "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
+    "icon": "public/Data/Images/Projects/Idisclosure2Logo.png"
+  },
+  {
+    "id": 8,
+    "name": "Idisclosure#3",
+    "summary": "PhotonによるP2P通信を使い、フロントエンドのみで構成したWebゲーム版",
+    "color": "bg-amber-500",
+    "members": ["Kyarasu"],
+    "memberCount": 1,
+    "startDate": "2026-02",
+    "role": "Frontend(React) / Frontend(Photon) / Frontend(HyakkiYako?)",
+    "icon": "public/Data/Images/Projects/IdisclosureSharp3_Logo.png"
+  }
+]
