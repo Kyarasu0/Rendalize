@@ -9,9 +9,9 @@ export const Image = ({
   props,
   color
 }: Props) => {
-  console.log("IMAGE", props?.src);
+  console.log("IMAGE", import.meta.env.BASE_URL + props?.src);
 
-  const src = props?.src;
+  const src = import.meta.env.BASE_URL + props?.src;
   if (!src) return null;
 
   const style: React.CSSProperties = {

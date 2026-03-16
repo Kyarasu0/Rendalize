@@ -22,7 +22,11 @@ export const Stack = ({
   const color = props?.color ?? COLORS;
 
   const style: React.CSSProperties = {
-    alignItems: props?.align ?? "left",
+    alignItems: props?.align === "center"
+      ? "center"
+      : props?.align === "right"
+      ? "flex-end"
+      : "flex-start",
     textAlign: props?.align ?? "left",
     backgroundColor: props?.bg_color ?? color.default_element_bg,
     color: props?.font_color ?? color.default_font,
