@@ -8,7 +8,7 @@
     "memberCount": 2,
     "startDate": "2024-10",
     "role": "Frontend(React Native) / Encryption Logic",
-    "icon": "public/Data/Images/Projects/VCESS_Croped.png"
+    "icon": "Data/Images/Projects/VCESS_Croped.png"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "memberCount": 5,
     "startDate": "2025-02",
     "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
-    "icon": "public/Data/Images/Projects/IdisclosureLogo.png"
+    "icon": "Data/Images/Projects/IdisclosureLogo.png"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "memberCount": 5,
     "startDate": "2025-09",
     "role": "Blender",
-    "icon": "public/Data/Images/Projects/SonicFlavor.png"
+    "icon": "Data/Images/Projects/SonicFlavor.png"
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "memberCount": 4,
     "startDate": "2025-10",
     "role": "Design / Frontend(Unity) / Game Logic / Backend(C#)",
-    "icon": "public/Data/Images/Projects/Idisclosure2Logo.png"
+    "icon": "Data/Images/Projects/Idisclosure2Logo.png"
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
     "memberCount": 3,
     "startDate": "2025-10",
     "role": "Blender / Frontend(HTML, CSS, JS) / Backend(Express.js) / C++ / Docker",
-    "icon": "public/Data/Images/Projects/MemorySteg-Hideout.png"
+    "icon": "Data/Images/Projects/MemorySteg-Hideout.png"
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "memberCount": 8,
     "startDate": "2025-10",
     "role": "Blender / Backend(Express.js) / DB Design / Docker",
-    "icon": "public/Data/Images/Projects/ARROW.jpg"
+    "icon": "Data/Images/Projects/ARROW.jpg"
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
     "memberCount": 5,
     "startDate": "2026-02",
     "role": "Backend(Express.js) / BlockChain(Symbol) / Docker",
-    "icon": "public/Data/Images/Projects/TrusToken.png"
+    "icon": "Data/Images/Projects/TrusToken.png"
   },
   {
     "id": 8,
@@ -85,6 +85,6 @@
     "memberCount": 1,
     "startDate": "2026-02",
     "role": "Frontend(React) / Frontend(Photon) / Frontend(HyakkiYako?)",
-    "icon": "public/Data/Images/Projects/IdisclosureSharp3_Logo.png"
+    "icon": "Data/Images/Projects/IdisclosureSharp3_Logo.png"
   }
 ]
