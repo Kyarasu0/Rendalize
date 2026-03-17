@@ -80,7 +80,7 @@ export const NormalCard = ({
                 const Component = config?.component;
 
                 if (!Component) {
-                    console.log("componentが見つかりませんでした: ");
+                    console.log("componentが見つかりませんでした: ", config);
                     return null;
                 }
 

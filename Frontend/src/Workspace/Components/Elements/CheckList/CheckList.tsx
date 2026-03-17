@@ -1,7 +1,7 @@
 import styles from "./CheckList.module.css";
 import { CheckSquare } from "lucide-react";
 import type { ElementNode } from "../../../Utils/runPipelines";
-import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
+import { COLORS } from "../../../SampleData/ForWhiteBg"
 
 interface Props extends ElementNode {}
 
