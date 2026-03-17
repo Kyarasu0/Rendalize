@@ -40,7 +40,7 @@ export const EasterEggHackathon = {
     {
       matchType: "stack",
       pipeline: "stackPipeline",
-      render: "Stack"
+      render: "JumpChatStack"
     },
     {
       matchType: "icon",

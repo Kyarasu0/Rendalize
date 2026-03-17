@@ -86,6 +86,12 @@ export const NormalCard = ({
                     return null;
                 }
 
+                //export interface ElementNode {
+                //   type: string
+                //   props?: Record<string, any>
+                //   content: string | ElementNode[]
+                // }
+
                 return (
                     <Component
                         key={eIdx}

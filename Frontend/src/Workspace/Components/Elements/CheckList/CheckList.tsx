@@ -3,11 +3,13 @@ import { CheckSquare } from "lucide-react";
 import type { ElementNode } from "../../../Utils/runPipelines";
 import { COLORS } from "../../../SampleData/ForWhiteBg"
 
-interface Props extends ElementNode {}
+interface Props extends ElementNode {
+  color?: Record<string, string>;
+}
 
-export const CheckList = ({ props }: Props) => {
+export const CheckList = ({ props, color }: Props) => {
   // color
-  const color = props?.color ?? COLORS;
+  const colorSet = color ?? COLORS;
 
   const items: string[] = props?.items || [];
 
@@ -16,9 +18,9 @@ export const CheckList = ({ props }: Props) => {
     justifyContent: props?.align ?? "left",
     textAlign: props?.align ?? "left",
     // bg_color
-    background: props?.bg_color ?? color.default_element_bg,
+    background: props?.bg_color ?? colorSet.default_element_bg,
     // font_color
-    color: props?.font_color ?? color.default_font,
+    color: props?.font_color ?? colorSet.default_font,
   };
 
   return (
@@ -27,7 +29,7 @@ export const CheckList = ({ props }: Props) => {
         <div key={index} className={styles.item}>
           <CheckSquare
             className={styles.icon}
-            style={{ color: color.blue }}
+            style={{ color: colorSet.blue }}
           />
           <span className={styles.text}>{item}</span>
         </div>

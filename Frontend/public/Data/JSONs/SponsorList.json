@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "RIST",
+    "image": "Data/Images/EEH/Sponsors/RiSRiST.jpg",
+    "bg_color": "#ffffff"
+  },
+  {
+    "id": 2,
+    "name": "TechTrain",
+    "image": "Data/Images/EEH/Sponsors/TechTrain.png",
+    "bg_color": "#d1f0ff"
+  },
+  {
+    "id": 3,
+    "name": "Horizon",
+    "image": "Data/Images/EEH/Sponsors/Horizon.png",
+    "bg_color": "#ffffff"
+  },
+  {
+    "id": 4,
+    "name": "Momoyama",
+    "image": "Data/Images/EEH/Sponsors/MomoyamaTech_framed2.png",
+    "bg_color": "#000000"
+  },
+  {
+    "id": 5,
+    "name": "Random",
+    "image": "Data/Images/EEH/Sponsors/random_logo.webp",
+    "bg_color": "#f0d1ff"
+  },
+  {
+    "id": 6,
+    "name": "Amatech",
+    "image": "Data/Images/EEH/Sponsors/amatech_croped.jpg",
+    "bg_color": "white"
+  }
+]

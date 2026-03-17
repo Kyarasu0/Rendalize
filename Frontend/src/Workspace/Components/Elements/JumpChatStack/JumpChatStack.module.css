@@ -1,0 +1,107 @@
+.card{
+  width:100%;
+  box-sizing:border-box;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  border-radius:16px;
+
+  transition:
+    transform 0.4s cubic-bezier(0.2,0,0,1),
+    box-shadow 0.4s ease;
+}
+
+/* stack wrapper */
+.stack{
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+/* =========================
+   吹き出しミニカード
+========================= */
+.miniCard{
+  position: relative;
+
+  width: fit-content; /* ← 吹き出しっぽくする重要ポイント */
+  max-width: 80%;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  padding:14px 18px;
+  border-radius:20px;
+
+  /* Reactから渡す色 */
+  background: var(--bubble-color, rgba(255,255,255,0.9));
+
+  /* 枠 */
+  border: 1px solid var(--bubble-border, rgba(0,0,0,0.08));
+
+  /* 影 */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+
+  /* アニメーション */
+  animation: bounce 1.6s ease-in-out infinite;
+
+  will-change: transform;
+}
+
+/* =========================
+   吹き出しのしっぽ（本体）
+========================= */
+.miniCard::after{
+  content: '';
+  position: absolute;
+
+  bottom: -14px; /* ← 下げる */
+  left: 50%;
+  transform: translateX(-50%); /* ← 中央揃え */
+
+  border-width: 14px 14px 0 14px;
+  border-style: solid;
+
+  border-color: var(--bubble-color, rgba(255,255,255,0.9)) transparent transparent transparent;
+}
+
+/* =========================
+   吹き出しの枠（影付き）
+========================= */
+.miniCard::before{
+  content: '';
+  position: absolute;
+
+  bottom: -16px; /* ← afterより少し下 */
+  left: 50%;
+  transform: translateX(-50%); /* ← 絶対必要 */
+
+  border-width: 16px 16px 0 16px;
+  border-style: solid;
+
+  border-color: var(--bubble-border, rgba(0,0,0,0.08)) transparent transparent transparent;
+}
+
+/* hover */
+.miniCard:hover{
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* =========================
+   ぴょんぴょん
+========================= */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}

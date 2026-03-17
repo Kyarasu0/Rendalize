@@ -124,8 +124,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
     // Font
     if (meta.font) {
-      const fonts = meta.font.split(/\s+/);
-      setGlobalFont(fonts.join(", "));
+      setGlobalFont(meta.font);
     }
 
     // Setting

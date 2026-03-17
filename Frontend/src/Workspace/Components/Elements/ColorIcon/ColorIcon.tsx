@@ -5,14 +5,17 @@ import React from "react";
 import { COLORS } from "../../../SampleData/ForWhiteBg"
 import ReactMarkdown from "react-markdown"
 
-interface Props extends ElementNode {}
+interface Props extends ElementNode {
+  color?: Record<string, string>;
+}
 
-export const ColorIcon = ({ props }: Props) => {
+export const ColorIcon = ({ props, color }: Props) => {
   // color
-  const color = props?.color ?? COLORS;
+  const colorSet = color ?? COLORS;
 
   const iconName = props?.iconName;
-  const bgColor = props?.bg_color ?? color.blue;
+  const bgColor = props?.bg_color ?? colorSet.blue;
+  const fontColor = props?.font_color ?? "white";
   const width = props?.width ?? "72px";
 
   // Lucide アイコンを動的取得。なければ Circle をデフォルト
@@ -26,7 +29,7 @@ export const ColorIcon = ({ props }: Props) => {
       >
         {React.createElement(IconComponent, {
           size: 28,
-          color: "white",
+          color: fontColor,
           className: styles.icon,
         })}
       </div>
