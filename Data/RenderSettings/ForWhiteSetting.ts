@@ -28,18 +28,22 @@ export const ForWhiteSetting = {
   },
   pipelines: [
     {
+      matchType: "list",
       pipeline: "listPipeline",
       render: "CheckList"
     },
     {
+      matchType: "image",
       pipeline: "imagePipeline",
       render: "Image"
     },
     {
+      matchType: "stack",
       pipeline: "stackPipeline",
       render: "Stack"
     },
     {
+      matchType: "icon",
       pipeline: "iconPipeline",
       render: "ColorIcon"
     }
