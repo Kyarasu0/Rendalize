@@ -19,6 +19,7 @@ export interface ElementNode {
 
 export interface PipelinePair {
   pipeline: Pipeline
+  matchType: string
   render: string
 }
 
@@ -60,7 +61,7 @@ export const runPipelines = (
     // その1つのパイプラインによって編集された部分に対して描画タイプをくっつける
     nodes = result.map(node => {
 
-      if (node.type === pair.pipeline.name.replace("Pipeline", "")) {
+      if (node.type === pair.matchType) {
         return {
           ...node,
           type: pair.render

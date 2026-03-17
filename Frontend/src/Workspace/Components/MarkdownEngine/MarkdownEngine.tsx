@@ -216,6 +216,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
     // パイプライン名を示す文字列を実際の関数に変換
     const pipelinePairs = setting.pipelines.map(p => ({
       pipeline: PipelineConfig[p.pipeline as PipelineKey],
+      matchType: p.matchType,
       render: p.render
     }))
 
