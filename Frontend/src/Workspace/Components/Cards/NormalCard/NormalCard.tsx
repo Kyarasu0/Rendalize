@@ -16,13 +16,13 @@ interface Props {
 export const NormalCard = ({
     elements,
     align = "left",
-    bg_color = "white",
+    bg_color = "init",
     font_color = "black",
     color = COLORS,
     style,
 }: Props) => {
 
-    console.log("COLORS: ", JSON.stringify(elements, null, 2));
+    console.log("COLORS: ", JSON.stringify(color, null, 2));
 
     const resolveColor = (value: string) => {
         if (value in color) return color[value];
@@ -35,7 +35,7 @@ export const NormalCard = ({
         textAlign: align,
 
         // bg_color
-        backgroundColor: bg_color ? 
+        backgroundColor: bg_color != "init" ? 
             bg_color === "none"
                 ? "transparent"
                 : resolveColor(bg_color)
@@ -59,6 +59,8 @@ export const NormalCard = ({
         //         : `1px solid ${color.grid}`,
         ...style,
     };
+
+    console.log("bg_color: ", bg_color);
 
     return (
         <div

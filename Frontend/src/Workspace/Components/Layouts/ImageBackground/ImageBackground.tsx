@@ -8,7 +8,7 @@ export const ImageBackground = ( { theme }: Props ) => {
     return(
         <div 
             className={styles.background}
-            style={{ backgroundImage: theme ? `url(${ import.meta.env.BASEURL + theme })` : undefined }}
+            style={{ backgroundImage: theme ? `url(${ import.meta.env.BASE_URL + theme })` : undefined }}
         />
     );
 };

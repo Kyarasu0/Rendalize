@@ -135,6 +135,7 @@ export const MarkdownEngine = ({ url, mode }: Props) => {
 
       if (config) {
         setSetting(config.setting);
+        console.log("setting config: ", config.setting);
       }
     }
   };
