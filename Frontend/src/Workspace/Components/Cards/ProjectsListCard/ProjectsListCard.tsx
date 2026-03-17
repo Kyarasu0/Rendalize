@@ -101,7 +101,7 @@ export const ProjectsListCard = ({
           <div className={styles.titleRow}>
             <div className={styles.iconWrapper}>
               <img
-                src={project.icon}
+                src={`${import.meta.env.BASE_URL + project.icon}`}
                 alt={`${project.name} icon`}
                 className={styles.iconImg}
                 onError={(e) =>
