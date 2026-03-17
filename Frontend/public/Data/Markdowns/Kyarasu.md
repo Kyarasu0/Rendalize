@@ -7,7 +7,7 @@ setting: ForWhiteSetting
 
 \NormalCard width=43% align=center
 #+ 自己紹介 bg_color=none
-![public/Data/Images/Kyarasu_Root.jpg width=90%]
+![Data/Images/Kyarasu_Root.jpg width=90%]
 ::Stack
 ## Name: 川野光喜
 ## Nickname: Kyarasu
