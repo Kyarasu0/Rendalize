@@ -2,7 +2,7 @@ import styles from "./NormalCard.module.css";
 import type { ElementNode } from "../../../Utils/runPipelines";
 import { ElementConfig } from "../../../Customs/ElementConfig";
 import ReactMarkdown from "react-markdown";
-import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
+import { COLORS } from "../../../SampleData/ForWhiteBg"
 
 interface Props {
   elements: ElementNode[];
