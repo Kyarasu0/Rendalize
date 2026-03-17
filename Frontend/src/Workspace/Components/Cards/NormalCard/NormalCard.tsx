@@ -22,6 +22,8 @@ export const NormalCard = ({
     style,
 }: Props) => {
 
+    console.log("COLORS: ", JSON.stringify(COLORS, null, 2));
+
     const resolveColor = (value: string) => {
         if (value in color) return color[value];
         return value;
