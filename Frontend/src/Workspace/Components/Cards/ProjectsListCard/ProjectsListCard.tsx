@@ -43,7 +43,7 @@ export const ProjectsListCard = ({
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        const res = await fetch(`/Data/JSONs/${json}`);
+        const res = await fetch(`${import.meta.env.BASE_URL}/Data/JSONs/${json}`);
         const data: Project[] = await res.json();
         setProjects(data);
       } catch (e) {

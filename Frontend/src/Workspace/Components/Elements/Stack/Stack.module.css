@@ -27,6 +27,7 @@
 
 /* stack wrapper */
 .stack{
+  width: 100%;
   display:flex;
   flex-direction:column;
   gap:20px;
@@ -34,6 +35,10 @@
 
 /* mini card */
 .miniCard{
+  /* 大きさ設定 */
+  width: 100%;
+  box-sizing: border-box;
+
   /* 要素配置設定 */
   display: flex;          /* ← 必須 */
   flex-direction: column; /* 縦方向に並べる */

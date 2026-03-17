@@ -37,7 +37,7 @@ export const TimelineCard = ({
   useEffect(() => {
     const loadJson = async () => {
       try {
-        const res = await fetch(`/Data/JSONs/${json}`);
+        const res = await fetch(`${import.meta.env.BASE_URL}/Data/JSONs/${json}`);
         const data: TimelineEvent[] = await res.json();
         setEvents(data);
       } catch (e) {
