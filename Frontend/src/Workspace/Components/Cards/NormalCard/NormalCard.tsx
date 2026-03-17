@@ -79,7 +79,10 @@ export const NormalCard = ({
                     ElementConfig[element.type as keyof typeof ElementConfig];
                 const Component = config?.component;
 
-                if (!Component) return null;
+                if (!Component) {
+                    console.log("componentが見つかりませんでした: ");
+                    return null;
+                }
 
                 return (
                     <Component
