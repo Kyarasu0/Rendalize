@@ -2,7 +2,7 @@ import * as Icons from "lucide-react";
 import type { ElementNode } from "../../../Utils/runPipelines";
 import styles from "./ColorIcon.module.css";
 import React from "react";
-import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
+import { COLORS } from "../../../SampleData/ForWhiteBg"
 import ReactMarkdown from "react-markdown"
 
 interface Props extends ElementNode {}

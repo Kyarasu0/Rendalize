@@ -1,7 +1,7 @@
 import styles from "./Stack.module.css";
 import ReactMarkdown from "react-markdown";
 import type { ElementNode } from "../../../Utils/runPipelines";
-import { COLORS } from "../../../../../public/Data/Colors/ForWhiteBg"
+import { COLORS } from "../../../SampleData/ForWhiteBg"
 
 /*
 ==================================================
