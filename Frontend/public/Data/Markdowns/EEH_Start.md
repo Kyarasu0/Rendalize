@@ -17,7 +17,7 @@ setting: EasterEggHackathon
 
 ===
 
-\NormalCard width=35% align=center
+\NormalCard width=35% align=center bg_color=none font_color=white
 # はじめに
 ## "EasterEggとは？"
 
@@ -52,3 +52,48 @@ setting: EasterEggHackathon
 ---
 
 \EggListCard json=SponsorList.json width=65%
+
+===
+
+\NormalCard width=25% align=left bg_color=none font_color=white
+# 今後の予定について
+?[ArrowRight]
+
+---
+
+\TimelineCard json=EEH_schedule.json width=75% rows=6
+# 宿泊する人の集合時間
+15:00にセミナーハウスにチェックインしたいと思います！
+RiSTの人は部室
+それ以外の人は立命館大学前まで来たら連絡してください！(迎えに行きます)
+# 宿泊しない人の集合時間
+明日の朝10時に **立命館大学H棟 H301**
+わからなくなったらまた連絡してください！
+
+===
+
+\NormalCard width=25% align=left bg_color=none font_color=white
+# このあと
+?[ArrowRight]
+
+---
+
+\NormalCard width=75% align=left
+# 宿泊する人の集合時間
+**15:00**にセミナーハウスにチェックインしたいと思います！
+RiSTの人は部室
+それ以外の人は立命館大学前まで来たら連絡してください！(迎えに行きます)
+**22:00**以降は出入りができないので注意してください！
+# 宿泊しない人の集合時間
+明日の **10:30** に **立命館大学H棟 H301**
+わからなくなったらまた連絡してください！
+
+===
+
+===
+
+\NormalCard width=100% align=center
+::Stack align=center
+# Easter Egg Hackathonを開始します！！
+仕様書はDiscordにアップします！
+::

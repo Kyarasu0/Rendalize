@@ -20,7 +20,7 @@ interface Props {
 export const TimelineCard = ({
   json = "",
   rows = 5,
-  bg_color = "white",
+  bg_color = "init",
   font_color = "black",
   color = COLORS,
   style,
@@ -50,7 +50,7 @@ export const TimelineCard = ({
   // card 全体スタイル
     const cardStyle: React.CSSProperties = {
       // bg_color
-      backgroundColor: bg_color ? 
+      backgroundColor: bg_color != "init" ? 
           bg_color === "none"
               ? "transparent"
               : resolveColor(bg_color)
