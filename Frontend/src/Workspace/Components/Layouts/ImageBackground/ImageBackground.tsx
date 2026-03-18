@@ -5,6 +5,7 @@ interface Props {
 }
 
 export const ImageBackground = ( { theme }: Props ) => {
+    console.log("ImageBackground: ", import.meta.env.BASE_URL + theme);
     return(
         <div 
             className={styles.background}
