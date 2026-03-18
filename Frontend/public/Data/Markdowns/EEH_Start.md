@@ -61,7 +61,7 @@ setting: EasterEggHackathon
 
 ---
 
-\TimelineCard json=EEH_schedule.json width=75% rows=6
+\TimelineCard json=EEH_schedule.json width=75% rows=7
 # 宿泊する人の集合時間
 15:00にセミナーハウスにチェックインしたいと思います！
 RiSTの人は部室
@@ -89,6 +89,32 @@ RiSTの人は部室
 わからなくなったらまた連絡してください！
 
 ===
+
+\NormalCard width=50% align=center
+?[FlagTriangleRight content=表機能賞(TechTrain賞)]
+![Data/Images/EEH/Sponsors/TechTrain.png width=30%]
+- 使いやすさ
+- UIの綺麗さ、おしゃれさ
+- 仕様書通りに作られているかどうか
+
+---
+
+\NormalCard width=50% align=center
+?[FlagTriangleRight content=裏機能賞 bg_color=#fd7979]
+![Data/Images/EEH/EEH_Award.png width=40%]
+- 面白さ
+- 意外さ
+- 見つけられなかったときの悔しさ
+
+===
+
+\NormalCard width=100% align=left
+?[Users content=チーム発表]
+① rioneko(4), fumi(2), 藤田(0)
+② たまごっち14世(?), fuji_haru(?), nakanishi(3)
+③ おしょた(5↑), famous(1), 内山将太郎(?)(半セミナーハウス組)
+④ K.dora(0), mu_san613(1), 鯖の味噌煮(3)(セミナーハウス組)
+⑤ 神の子(1), quwon(1), アシッド田中(2)(セミナーハウス組)
 
 ===
 
