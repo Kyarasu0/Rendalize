@@ -34,5 +34,11 @@
     "name": "Amatech",
     "image": "Data/Images/EEH/Sponsors/amatech_croped.jpg",
     "bg_color": "white"
+  },
+  {
+    "id": 7,
+    "name": "CraftStudium",
+    "image": "Data/Images/EEH/Sponsors/CraftStadium_1.png",
+    "bg_color": "white"
   }
 ]

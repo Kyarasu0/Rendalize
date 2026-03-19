@@ -110,11 +110,18 @@ RiSTの人は部室
 
 \NormalCard width=100% align=left
 ?[Users content=チーム発表]
-① rioneko(4), fumi(2), 藤田(0)
-② たまごっち14世(?), fuji_haru(?), nakanishi(3)
-③ おしょた(5↑), famous(1), 内山将太郎(?)(半セミナーハウス組)
-④ K.dora(0), mu_san613(1), 鯖の味噌煮(3)(セミナーハウス組)
-⑤ 神の子(1), quwon(1), アシッド田中(2)(セミナーハウス組)
+① rioneko, fumi, 藤田
+② たまごっち14世, fuji_haru, nakanishi
+③ おしょた, famous, 内山将太郎
+④ K.dora, mu_san613, 鯖の味噌煮
+⑤ 神の子, quwon, アシッド田中
+
+===
+
+\NormalCard width=100% align=left
+?[TriangleAlert content=CraftStadiumについて bg_color=#fdf86d font_color=#333]
+# 制作物の提出はCraftStadium上で行います
+ネットでCraftStadiumと検索し、EasterEggHackathonに参加登録お願いします。
 
 ===
 
