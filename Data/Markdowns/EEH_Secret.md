@@ -74,7 +74,7 @@ setting: EasterEggHackathon
 
 ===
 
-\NormalCard width=100% align=center
+\NormalCard width=50% align=center
 ?[FlagTriangleRight content=表機能賞(TechTrain賞)]
 ![Data/Images/EEH/Sponsors/TechTrain.png width=30%]
 - 使いやすさ
@@ -101,7 +101,7 @@ setting: EasterEggHackathon
 
 ===
 
-\NormalCard width=100% align=center
+\NormalCard width=50% align=center
 ?[FlagTriangleRight content=裏機能賞 bg_color=#fd7979]
 ![Data/Images/EEH/EEH_Award.png width=40%]
 - 面白さ
