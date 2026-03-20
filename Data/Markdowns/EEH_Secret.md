@@ -24,7 +24,7 @@ setting: EasterEggHackathon
 
 ---
 
-\NormalCard width=65% align=center bg_color=none font_color=white
+\NormalCard width=65%
 1. チーム3 
 2. チーム5
 3. チーム2
