@@ -20,23 +20,21 @@ setting: EasterEggHackathon
 \NormalCard width=33%
 ?[BookCheck content=評価担当 bg_color=#61baff]
 - Ryota Kannno
-- puts
-- kinoshita
+- かほ
+- Silver
+- (kinoshita)
 
 ---
 
 \NormalCard width=33%
 ?[Users content=受付/懇親会担当 bg_color=#fd7979]
-- かほ
-- なかむー
-- とある
+- Kyarasu
 
 ---
 
 \NormalCard width=33%
 ?[MonitorCheck content=発表や臨時対応 bg_color=#79fd8d]
-- Kyarasu
-- Silver
+- とある
 
 ===
 
