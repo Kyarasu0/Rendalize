@@ -17,13 +17,14 @@ setting: EasterEggHackathon
 
 ===
 
-\NormalCard width=100% align=center bg_color=none font_color=white
+\NormalCard width=35% align=center bg_color=none font_color=white
 # 発表順
 ## 予定時間: 15:00~15:20
 ?[ArrowRight]
 
 ---
 
+\NormalCard width=65% align=center bg_color=none font_color=white
 1. チーム3 
 2. チーム5
 3. チーム2
