@@ -11,9 +11,24 @@ setting: EasterEggHackathon
 
 \NormalCard width=100% align=center
 ::Stack align=center
-# Easter Egg Hackathonの閉会式を開始します！！
+# Easter Egg Hackathonの結果発表会を開始します！！
 2026/3/21(土) 予定時間: 16:30~17:00
 ::
+
+===
+
+\NormalCard width=100% align=center bg_color=none font_color=white
+# 発表順
+## 予定時間: 15:00~15:20
+?[ArrowRight]
+
+---
+
+1. チーム3 
+2. チーム5
+3. チーム2
+4. チーム1 (半熟卵)
+5. チーム4
 
 ===
 
