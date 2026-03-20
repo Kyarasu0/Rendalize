@@ -17,6 +17,22 @@ setting: EasterEggHackathon
 
 ===
 
+\NormalCard width=35% bg_color=none font_color=white align=center
+# 本題に入る前に...
+?[ArrowRight]
+
+---
+
+\NormalCard width=65% align=center
+## 是非Xで広報お願いします！
+![Data/Images/EEH/QRs2.png width=80%]
+後ほど各チームのDiscordにも送ります！
+#EasterEggHackathon2026
+#TechTrain
+でハッシュタグお願いします！
+
+===
+
 \NormalCard width=35% align=center bg_color=none font_color=white
 # はじめに
 ## "EasterEggとは？"
@@ -109,6 +125,13 @@ RiSTの人は部室
 ===
 
 \NormalCard width=100% align=left
+?[TriangleAlert content=CraftStadiumについて bg_color=#fdf86d font_color=#333]
+# 制作物の提出はCraftStadium上で行います
+ネットでCraftStadiumと検索し、EasterEggHackathonに参加登録お願いします。
+
+===
+
+\NormalCard width=50% align=left
 ?[Users content=チーム発表]
 ① rioneko, fumi, 藤田
 ② たまごっち14世, fuji_haru, nakanishi
@@ -116,12 +139,19 @@ RiSTの人は部室
 ④ K.dora, mu_san613, 鯖の味噌煮
 ⑤ 神の子, quwon, アシッド田中
 
-===
+---
 
-\NormalCard width=100% align=left
-?[TriangleAlert content=CraftStadiumについて bg_color=#fdf86d font_color=#333]
-# 制作物の提出はCraftStadium上で行います
-ネットでCraftStadiumと検索し、EasterEggHackathonに参加登録お願いします。
+# アイスブレイク
+## 共通点の中に1つだけ嘘
+内容: チームで3つの共通点を見つけるがただし1つ嘘を混ぜる。
+進め方:
+- 3人で共通点を2つ探す
+- 1つ「それっぽい嘘」を作る
+- 運営が開発中のタイミングで当てに行きます！
+例: 
+- 「全員ラーメン好き」
+- 「全員夜型」
+- 「全員関西出身」← (嘘)
 
 ===
 
