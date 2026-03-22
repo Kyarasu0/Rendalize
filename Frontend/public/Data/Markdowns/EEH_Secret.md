@@ -151,10 +151,10 @@ setting: EasterEggHackathon
 
 \NormalCard width=50% align=center
 # 受賞チーム
-# TeamX
+# Team2 - くちぱっち
 ## 運営からのコメント
-- XXXXXXの機能が良かった
-- YYYYYYの機能が良かった
+- 学年が上がった時にリセットされるという機能とつけ忘れがあった時につけられる機能が良いと思った
+- 履歴が分かりやすく閲覧することができ、操作性が単純であるのが良かった
 
 ===
 
@@ -178,10 +178,11 @@ setting: EasterEggHackathon
 
 \NormalCard width=50% align=center
 # 受賞チーム
-# TeamX
-## 参加者からのコメント
-- XXXXXXの機能が良かった
-- YYYYYYの機能が良かった
+# Team5 - チキン-BLOCK-SHOOTING
+## 参加者/運営からのコメント
+- モールス信号を利用するという点が特に意外性を感じた
+- ゲームの世界感が統一されていて良かった
+- 驚きという面で見つけやすい物と時間がかかる物があり、継続して楽しめる作品だと感じた
 
 ===
 
